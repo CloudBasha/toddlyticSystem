@@ -1,0 +1,23 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-custm">
+<!--    <button class="button button-positive button-icon ion-ios-arrow-back" ng-click="hideItems()" />-->
+    <h1 class="title">{{headerText}}</h1>
+    <button class="button button-positive button-icon ion-checkmark" ng-show="multiSelect" ng-click="hideItems()" />
+  </ion-header-bar>
+  
+  <ion-content class="bar-subheader-custm">
+    <ion-list>
+      <ion-item class="item-checkbox" ng-if="multiSelect" ng-repeat="item in items">
+        <label class="checkbox">
+          <input ng-disabled=true type="checkbox" ng-checked="item.checked" ng-model="item.checked">
+        </label>
+        <span ng-if="item.contactId != null">{{item.name}}</span>
+        <span ng-if="item.programSchoolId != null">{{item.programName}}</span>
+      </ion-item>
+      <label class="item" ng-click="validate(item)" ng-if="!multiSelect" ng-repeat="item in items">
+        {{item.name}}
+      </label>
+    </ion-list>
+  </ion-content>
+</ion-modal-view>
+

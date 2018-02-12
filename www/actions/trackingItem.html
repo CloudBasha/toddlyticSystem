@@ -1,0 +1,125 @@
+<ion-modal-view>
+  <ion-header-bar class="bar bar-custom-color text-center">
+    <h1 class="title padding-top" style="text-align: center">Edit Activity</h1>
+    <button class="button icon bar-custom-color" ng-click="closeTrackingModal()">
+        <i class="icon ion-close"></i>
+    </button>
+  </ion-header-bar>
+  <ion-content class="padding">
+    <div class="list">
+        <div ng-if="newsfeedItem.tracking != null">
+          <div class="item item-avatar">
+            <img ng-src="./img/defaultAvatar.jpg" ng-if="newsfeedItem.auditLog.userId.contact.photoUrl == null">
+            <img ng-src="{{checkImageUrl(newsfeedItem.auditLog.userId.contact.photoUrl)}}"
+                 ng-if="newsfeedItem.auditLog.userId.contact.photoUrl != null">
+            <p class="link item-text-wrap"><span
+              ng-click="openPersonInfo(newsfeedItem.auditLog.userId.contact.type,newsfeedItem.auditLog.userId.contact)">{{newsfeedItem.auditLog.userId.contact.name}}</span>
+            </p>
+
+
+
+                        <span ng-if="newsfeedItem.tracking.typeName == 'healthCheck' && newsfeedItem.tracking.remark != 'healthy'">
+                            <span>completed Health Check for <span class="link item-text-wrap"
+                                                                   ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span></span>
+                            <span ng-if="newsfeedItem.tracking.temperature > 36.7"><br/><span class="link item-text-wrap"
+                                                                                      ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span>'s temperature is {{newsfeedItem.tracking.temperature}}!</span>
+                            <span ng-if="newsfeedItem.tracking.cough != false"><br/><span class="link item-text-wrap"
+                                                                                  ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span> has a cough.</span>
+                            <span ng-if="newsfeedItem.tracking.blister != ''"><br/><span class="link item-text-wrap"
+                                                                                 ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span> has a blister eruption in {{newsfeedItem.tracking.blister}}.</span>
+                            <span ng-if="newsfeedItem.tracking.rashes != false"><br/><span class="link item-text-wrap"
+                                                                                   ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span> has a rash.</span>
+                            <span ng-if="newsfeedItem.tracking.mouthulcer != false"><br/><span class="link item-text-wrap"
+                                                                                       ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span> has a mouth ulcer.</span>
+                            <span ng-if="newsfeedItem.tracking.droolingsaliva != false"><br/><span class="link item-text-wrap"
+                                                                                           ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span> is drooling saliva.</span>
+                            <span ng-if="newsfeedItem.tracking.redwateryeyes != false"><br/><span class="link item-text-wrap"
+                                                                                          ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span> has red watery eyes.</span>
+                            <span ng-if="newsfeedItem.tracking.runnynose != false"><br/><span class="link item-text-wrap"
+                                                                                      ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span> has a runny nose.</span>
+                            <span ng-if="newsfeedItem.tracking.virus != false"><br/><span class="link item-text-wrap"
+                                                                                  ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span> has a virus infection.</span>
+                            <span ng-if="newsfeedItem.tracking.remark != ''"><br/><span class="link item-text-wrap"
+                                                                                ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span> has {{newsfeedItem.tracking.remark}}.</span>
+                        </span>
+                        <span ng-if="newsfeedItem.tracking.typeName == 'healthCheck' && newsfeedItem.tracking.remark == 'healthy'">
+                            <span> completed Health Check for
+                              <span class="link item-text-wrap"
+                                    ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span>
+                            </span>
+                            <span><br/>
+                              <span class="link item-text-wrap"
+                                    ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span>
+                              is healthy.</span>
+                        </span>
+
+                        <span ng-if="newsfeedItem.tracking.typeName != 'healthCheck'">
+                            <span
+                              ng-if="newsfeedItem.tracking.typeName == 'bath'"><span class="link item-text-wrap"
+                                                                             ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span> had a bath!</span>
+                            <span ng-if="newsfeedItem.tracking.typeName == 'potty1'"><span class="link item-text-wrap"
+                                                                                   ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span> had a small potty!</span>
+                            <span ng-if="newsfeedItem.tracking.typeName == 'potty2'"><span class="link item-text-wrap"
+                                                                                   ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span> had a big potty!</span>
+                            <span ng-if="newsfeedItem.tracking.typeName == 'bottleFeeding'"><span class="link item-text-wrap"
+                                                                                          ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span> had {{newsfeedItem.tracking.quantity}} {{newsfeedItem.tracking.unit}} of milk!</span>
+                            <span ng-if="newsfeedItem.tracking.typeName == 'meal'"><span class="link item-text-wrap"
+                                                                                 ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span> had {{newsfeedItem.tracking.meal.mealName}} for {{newsfeedItem.tracking.menu.menuName}}!</span>
+                            <span ng-if="newsfeedItem.tracking.typeName == 'medication'">gave medication to <span
+                              class="link item-text-wrap"
+                              ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span>. {{newsfeedItem.tracking.remark}}</span>
+                            <span
+                              ng-if="(newsfeedItem.tracking.typeName == 'sleepoMeter' || newsfeedItem.tracking.typeName == 'sleep') && (newsfeedItem.tracking.value == 'Start')"
+                            ><span class="link item-text-wrap"
+                                   ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span> went to sleep.</span>
+                            <span
+                              ng-if="(newsfeedItem.tracking.typeName == 'sleepoMeter' || newsfeedItem.tracking.typeName == 'sleep') && (newsfeedItem.tracking.value == 'End')"
+                            ><span class="link item-text-wrap"
+                                   ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span> woke up from sleep.</span>
+                            <span
+                              ng-if="newsfeedItem.tracking.typeName == 'checkIn'">checked in <span class="link item-text-wrap"
+                                                                                           ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span>.</span>
+                            <span ng-if="newsfeedItem.tracking.typeName == 'checkOut'">checked out <span
+                              class="link item-text-wrap"
+                              ng-click="openPersonInfo('Student',newsfeedItem.tracking.student)">{{newsfeedItem.tracking.student.name}}</span>.</span>
+                        </span>
+
+            <div>
+              <time>{{ newsfeedItem.auditLog.formattedDateTime | amCalendar }}</time>
+            </div>
+          </div>
+        </div>
+        <label class="item item-input item-stacked-label padding-right">
+          <span class="input-label">Date</span>
+          <input type="text" name="date" ng-model="editTracking.date" placeholder="Date" ng-click="openDatePicker()" readonly="" required>
+          <button style="position: absolute; bottom: 5px; right: 10px;" class="button button-icon ion-edit"></button>
+          <div ng-messages="appointmentForm.p_date.$error" class="col-sm-12 help-block" role="alert">
+            <div ng-message="required">Required field*</div>
+          </div>
+        </label>
+        <label class="item item-input item-stacked-label padding-right">
+          <span class="input-label">Time</span>
+          <input type="text" name="time" ng-model="editTracking.time" placeholder="Time" ng-click="openTimePicker()" readonly="" required>
+          <button style="position: absolute; bottom: 5px; right: 10px;" class="button button-icon ion-edit"></button>
+          <div ng-messages="appointmentForm.p_date.$error" class="col-sm-12 help-block" role="alert">
+            <div ng-message="required">Required field*</div>
+          </div>
+        </label>
+        </div>
+  </ion-content>
+  <div class="bar-footer" style="position: absolute; bottom:5vh;left:0;right:0">
+        <div class="row">
+<!--
+          <div class="col">
+            <button class="button button-block button-stable" ng-click="closeTrackingModal()">Cancel</button>
+          </div>
+-->
+          <div class="col">
+            <button class="button button-block button-assertive" ng-click="deleteTracking()">Delete</button>
+          </div>
+          <div class="col">
+            <button class="button button-block bar-custom-color" ng-click="submitTracking()">Save</button>
+          </div>
+        </div>
+  </div>
+</ion-modal-view>

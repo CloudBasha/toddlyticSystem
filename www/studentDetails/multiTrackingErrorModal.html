@@ -1,0 +1,19 @@
+<ion-modal-view>
+  <ion-header-bar class="bar toddlyticModalBar text-center">
+    <i class="bulkTrackingModalIcon fa fa-exclamation-circle"></i>
+    <h1 class="title padding-top" style="text-align: center">Some students were not checked</h1>
+    <button class="button closeButton icon" ng-click="closeModal()">
+        <i class="icon ion-close"></i>
+    </button>
+  </ion-header-bar>
+  <ion-content class="padding eventDetails has-header2">
+     <h4 class="title padding-top" style="text-align: center">The students below were not checked in because they are not enrolled in any program. To check in or check out these students, please enroll them into a program.</h4>
+     <div class="paddingTop25 text-center">
+      <table style="width: 100%;font-size: 20px;">
+        <tr ng-repeat="(key, value) in errorResponse.studentList">
+          <td style="padding-bottom: 10px;"> {{value}} </td>
+        </tr> 
+      </table>
+    </div>
+  </ion-content>
+</ion-modal-view>

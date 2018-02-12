@@ -1,0 +1,14 @@
+<ion-popover-view class="sort-places">
+    <ion-content class="sortPlaceScroll">
+      <ion-list>
+        <ion-item ng-click="sortPlaces('name')">
+         Sort by name
+         <i class="icon ion-checkmark pull-right" ng-if="sortVal === 'name'"></i>
+        </ion-item>
+        <ion-item ng-click="sortPlaces('distance')">
+         Sort by distance
+         <i class="icon ion-checkmark pull-right" ng-if="sortVal === 'distance'"></i>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+</ion-popover-view>

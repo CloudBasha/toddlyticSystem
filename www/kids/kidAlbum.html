@@ -1,0 +1,9 @@
+<ion-content class="bar-subheader-custm popupalubum-wrap">
+  <ion-list ng-repeat="album in albumsWithCovers">
+    <ion-radio ng-value="album.albumId" ng-model="getAlbum.Id">
+      <img class="img-wrap" ng-src="./img/album.png" ng-if="album.coverDirUri == null">
+      <img class="img-wrap" ng-src="{{checkImageUrl(album.coverDirUri)}}" ng-if="album.coverDirUri != null">
+      <span class="list-txt">{{album.name}}</span>
+    </ion-radio>
+  </ion-list>
+</ion-content>

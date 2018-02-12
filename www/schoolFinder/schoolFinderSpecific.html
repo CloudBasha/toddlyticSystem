@@ -1,0 +1,96 @@
+<ion-content class="schoolFinderWrap">
+  <div id="main" class="schoolSpecificContainer">
+    <ul class="list">
+      <li class="item schoolImageContainer">
+        <ul class="dealCarousel" rn-carousel rn-carousel-controls-allow-loop rn-carousel-index="carouselIndex" rn-carousel-auto-slide="5" rn-carousel-transition="hexagon">
+            <li ng-repeat="photo in schoolPhotos track by $index">
+                <img class="schoolImage" src="{{photo}}">
+            </li>
+        </ul>
+      </li>
+      <li class="item">
+        <div class="row">
+          <div class="col-75" style="white-space:initial;">{{placeDetails.name}}</div>
+          <div align="right" class="col-25">
+            <a ng-click="navigateToLocation()">
+              <img style="font-size: 50px" src="./img/GPS.svg">
+            </a>
+<!--
+            <a ng-href="geo:{{placeLat}},{{placeLong}}?q={{placeLat}},{{placeLong}}">
+              <img style="font-size: 50px" src="./img/GPS.svg">
+            </a>
+-->
+          </div>
+        </div>
+        <div class="col">
+          <div class="col-75" style="white-space:initial;">{{placeDetails.formatted_address}}</div>
+        </div>
+        <div class="col padding-top">
+          <div class="col-75">{{placeDetails.international_phone_number}}</div>
+        </div>
+      </li>
+      <li ng-if="schoolReviews.length > 0" class="item">
+        <div class="col">
+          Reviews & Ratings
+        </div>
+        <div style="min-height:{{containerHeight}}px">
+          <ul class="dealCarousel" rn-carousel rn-carousel-controls-allow-loop rn-carousel-index="data.carouselIndex" rn-carousel-auto-slide="5" rn-carousel-transition="hexagon">
+            <li ng-repeat="review in schoolReviews track by $index">
+                <div id="schoolSpecificContainer_{{$index}}">
+                  <div class="col">
+                    <img class="reviewImage" src="{{review.profile_photo_url}}">
+                    {{review.author_name}}
+                  </div>
+                  <div class="row">
+                    <div class="col" style="white-space:initial;">{{review.text}}</div>
+                  </div>
+                  <div class="row">
+                      <rating class="rating" ng-model="review.rating" readonly="true" max="5"></rating>
+                  </div>
+                  <div class="row">
+                    <div align="right" class="col col-bottom">{{review.relative_time_description}}</div>
+                  </div>
+                </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li ng-show="showToddlyticSchoolFunctions" class="item">
+        <div class="col text-center">
+          <button class="button button-block signin-btn button-calm" ng-click="openAppointmentModal()"
+                  style="background-color: #13A0DB !important;">Make an appointment
+          </button>
+        </div>
+      </li>
+      <li ng-show="!showToddlyticSchoolFunctions" class="item">
+        <div class="col text-center">
+          <button class="button button-block signin-btn button-calm" ng-click="openSchoolReferral()"
+                  style="background-color: #13A0DB !important;">Refer this school
+          </button>
+        </div>
+      </li>
+      <li ng-show="showToddlyticSchoolFunctions" class="item">
+        <div class="row">
+          <div class="col-33 text-center">
+            <i ng-click="show()" class="icon-call pb10 parentSchoolInfoIcon" aria-hidden="true"></i>
+            <div style="white-space: normal;">Contact Now</div>
+          </div>
+          <div class="col-33 text-center">
+            <i ng-click="goToSchoolPrograms(schoolInfoObj)" class="icon-programs pb10 parentSchoolInfoIcon" aria-hidden="true"></i>
+            <div style="white-space: normal;">Programs</div>
+          </div>
+<!--
+          <div class="col-25 text-center">
+            <i class="icon-newletter pb10 parentSchoolInfoIcon" aria-hidden="true"></i>
+            <div style="white-space: normal;">News</div>
+          </div>
+-->
+          <div class="col-33 text-center">
+            <i ng-click="goToCalendar(schoolInfoObj)" class="icon-calander pb10 parentSchoolInfoIcon" aria-hidden="true"></i>
+            <div style="white-space: normal;">Calendar</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</ion-content>

@@ -1,0 +1,80 @@
+<ion-content class="bar-subheader-custm photos">
+  <div ng-if="show2Grid == 2">
+    <div class="row" ng-repeat="image in photosOfAlbum" ng-if="$index % show2Grid === 0 && (loginResponse.type === 'ADMIN' || loginResponse.type == 'TEACHER')">
+      <div class="col col-50" ng-if="$index < photosOfAlbum.length" ng-click="showImage($index)">
+        <img ng-src="{{checkImageUrl(photosOfAlbum[$index].photo.imageUrl)}}" width="100%"/>
+      </div>
+      <div class="col col-50" ng-if="$index + 1 < photosOfAlbum.length" ng-click="showImage($index + 1)">
+        <img ng-src="{{checkImageUrl(photosOfAlbum[$index + 1].photo.imageUrl)}}" width="100%"/>
+      </div>
+    </div>
+
+    <div class="row" ng-repeat="image in photosOfAlbum" ng-if="$index % show2Grid === 0 && loginResponse.type == 'PARENT'">
+      <div class="col col-50" ng-if="$index < photosOfAlbum.length" ng-click="showImage($index)">
+        <img ng-src="{{checkImageUrl(photosOfAlbum[$index].imageUrl)}}" width="100%"/>
+      </div>
+      <div class="col col-50" ng-if="$index + 1 < photosOfAlbum.length" ng-click="showImage($index + 1)">
+        <img ng-src="{{checkImageUrl(photosOfAlbum[$index + 1].imageUrl)}}" width="100%"/>
+      </div>
+    </div>
+  </div>
+
+  <div ng-if="show2Grid == 4">
+    <div class="row" ng-repeat="image in photosOfAlbum" ng-if="$index % show2Grid === 0 && loginResponse.type == 'ADMIN' || loginResponse.type == 'TEACHER'">
+      <div class="col col-25" ng-if="$index < photosOfAlbum.length" ng-click="showImage($index)">
+        <img ng-src="{{checkImageUrl(photosOfAlbum[$index].photo.imageUrl)}}" width="100%"/>
+      </div>
+      <div class="col col-25" ng-if="$index + 1 < photosOfAlbum.length" ng-click="showImage($index + 1)">
+        <img ng-src="{{checkImageUrl(photosOfAlbum[$index + 1].photo.imageUrl)}}" width="100%"/>
+      </div>
+      <div class="col col-25" ng-if="$index + 2 < photosOfAlbum.length" ng-click="showImage($index + 2)">
+        <img ng-src="{{checkImageUrl(photosOfAlbum[$index + 2].photo.imageUrl)}}" width="100%"/>
+      </div>
+      <div class="col col-25" ng-if="$index + 3 < photosOfAlbum.length" ng-click="showImage($index + 3)">
+        <img ng-src="{{checkImageUrl(photosOfAlbum[$index + 3].photo.imageUrl)}}" width="100%"/>
+      </div>
+    </div>
+
+    <div class="row" ng-repeat="image in photosOfAlbum" ng-if="$index % show2Grid === 0 && loginResponse.type == 'PARENT'">
+      <div class="col col-25" ng-if="$index < photosOfAlbum.length" ng-click="showImage($index)">
+        <img ng-src="{{checkImageUrl(photosOfAlbum[$index].imageUrl)}}" width="100%"/>
+      </div>
+      <div class="col col-25" ng-if="$index + 1 < photosOfAlbum.length" ng-click="showImage($index + 1)">
+        <img ng-src="{{checkImageUrl(photosOfAlbum[$index + 1].imageUrl)}}" width="100%"/>
+      </div>
+      <div class="col col-25" ng-if="$index + 2 < photosOfAlbum.length" ng-click="showImage($index + 2)">
+        <img ng-src="{{checkImageUrl(photosOfAlbum[$index + 2].imageUrl)}}" width="100%"/>
+      </div>
+      <div class="col col-25" ng-if="$index + 3 < photosOfAlbum.length" ng-click="showImage($index + 3)">
+        <img ng-src="{{checkImageUrl(photosOfAlbum[$index + 3].imageUrl)}}" width="100%"/>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<script id="image-modal.html" type="text/ng-template">
+  <button ng-if="loginResponse.type === 'PARENT'" class="button icon ion-ios-download-outline button-download" ng-click="downloadPhoto(currentPhoto, $event)"></button>
+  <button ng-if="loginResponse.type !== 'PARENT'" class="button icon ion-ios-download-outline button-download" ng-click="downloadPhoto(currentPhoto.photo, $event)"></button>
+  <button ng-if="loginResponse.type !== 'PARENT'" class="button icon ion-android-delete button-delete" ng-click="deletePhoto(currentPhoto, $event)"></button>
+  <div ng-if="loginResponse.type == 'ADMIN' || loginResponse.type == 'TEACHER'" class="modal image-modal transparent"
+       ng-click="closeModal()">
+    <ion-slide-box on-slide-changed="slideChanged($index)"
+                   show-pager="false">
+      <ion-slide ng-repeat="oImage in photosOfAlbum">
+        <img ng-src="{{checkImageUrl(oImage.photo.imageUrl)}}" class="fullscreen-image"/>
+        <p class="info">{{oImage.photo.imageDescription}}</p>
+      </ion-slide>
+    </ion-slide-box>
+  </div>
+
+  <div ng-if="loginResponse.type == 'PARENT'" class="modal image-modal transparent"
+       ng-click="closeModal()">
+    <ion-slide-box on-slide-changed="slideChanged($index)"
+                   show-pager="false">
+      <ion-slide ng-repeat="oImage in photosOfAlbum">
+        <img ng-src="{{checkImageUrl(oImage.imageUrl)}}" class="fullscreen-image"/>
+        <p class="info">{{oImage.imageDescription}}</p>
+      </ion-slide>
+    </ion-slide-box>
+  </div>
+</script>

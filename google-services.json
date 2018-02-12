@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "773892175021",
+    "firebase_url": "https://toddlytic-167216.firebaseio.com",
+    "project_id": "toddlytic-167216",
+    "storage_bucket": "toddlytic-167216.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:773892175021:android:b3bebd53abdaf7ec",
+        "android_client_info": {
+          "package_name": "com.ionicframework.toddlytics252707"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "773892175021-4l0o1cqbghb6vfcgmqo8qbmtdellpnv6.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "773892175021-o2587mr6vr54rhj8jrrt1uhrcei3519u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOW8aU-SBAiaqB28f_gCEjnFDFQhmXoqM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

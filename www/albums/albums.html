@@ -1,0 +1,25 @@
+<ion-content class="bar-subheader-custm">
+    <div ng-if="loginResponse.type === 'ADMIN' || loginResponse.type === 'TEACHER'" class="list card" ng-repeat="album in albumsWithCovers">
+        <div class="item" ng-click="getPhotoByAlbum(album.albumId)">
+            <h2>{{album.name}}</h2>
+
+            <div class="item item-image">
+                <img ng-src="./img/album.png" ng-if="album.coverDirUri == null">
+                <img ng-src="{{checkImageUrl(album.coverDirUri)}}"
+                     ng-if="album.coverDirUri != null">
+            </div>
+        </div>
+    </div>
+  
+    <div ng-if="loginResponse.type == 'PARENT'" class="list card" ng-repeat="album in albumsWithCovers">
+        <div class="item" ng-click="getParentsPhotoByAlbum(album)">
+            <h2>{{album.album.name}}</h2>
+
+            <div class="item item-image">
+                <img ng-src="./img/album.png" ng-if="album.album.coverDirUri == null">
+                <img ng-src="{{checkImageUrl(album.album.coverDirUri)}}"
+                     ng-if="album.album.coverDirUri != null">
+            </div>
+        </div>
+    </div>
+</ion-content>

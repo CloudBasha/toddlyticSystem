@@ -1,0 +1,118 @@
+<ion-view class="schoolRegister">
+  <form name="schoolRegistrationForm" novalidate>
+    <ion-content class="bg-color">
+      <div class="col text-center" ng-if="!submitRegister">
+        <h3 class="infoTitle">School Registration</h3>
+      </div>
+        <div ng-if="!submitRegister" class="row responsive-sm login-form">
+            <div class="col">
+              <div class="list" align="center" style="margin-bottom: 20vh;">
+                <label ng-if="current == 'first'" class="item item-input item-input-custm item-stacked-label bdr-none ">
+                  <span class="input-label txt-color bg-none input-label-custm">Full Name</span>
+                  <input type="text" name="fullName" class="bg-none input-custm"
+                         ng-model="registerObj.fullName" required>
+                  <div ng-messages="schoolRegistrationForm.fullName.$error" class="col-sm-12 help-block noPadding" role="alert">
+                    <div ng-message="required">Required field*</div>
+                  </div>
+                </label>
+                <label ng-if="current == 'first'" class="item item-input item-input-custm item-stacked-label bdr-none">
+                  <span class="input-label txt-color bg-none input-label-custm">Email Address</span>
+                  <input type="email" ng-disabled="user.socialType  == 'google' || user.socialType == 'facebook'" ng-pattern='/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i' name="email" placeholder="" class="bg-none input-custm" ng-model="registerObj.email" required>
+                  <div ng-messages="schoolRegistrationForm.email.$error" class="col-sm-12 help-block noPadding" role="alert">
+                    <div ng-message="required">Required field*</div>
+                      <div ng-message="pattern">This is an invalid email address</div>
+                  </div>
+                </label>
+                <label ng-if="current == 'first'" class="item item-input item-input-custm item-stacked-label bdr-none">
+                  <span class="input-label txt-color bg-none input-label-custm">Mobile Number</span>
+                  <input type="text" name="mobileNo" placeholder="" ng-pattern="/^(\+\d{1,3}[- ]?)?\d{9}$/" class="bg-none input-custm" ng-model="registerObj.mobilePhone" ng-init="registerObj.mobilePhone='+'" required>
+                  <div ng-messages="schoolRegistrationForm.mobileNo.$error" class="col-sm-12 help-block noPadding" role="alert">
+                    <div ng-message="required">Required field*</div>
+                    <div ng-message="pattern">Your phone number must include your full country code with the + symbol</div>
+                  </div>
+                </label>
+                <label ng-if="current == 'first' && !user.socialType" ng-if="!user.socialType" class="item item-input item-input-custm item-stacked-label bdr-none">
+                  <span class="input-label txt-color bg-none input-label-custm">New Password</span>
+                  <input type="password" name="password" class="bg-none input-custm" ng-model="registerObj.password" ng-pattern='/^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z_@./#&+-]{6,}$/i' required>
+                  <div ng-messages="schoolRegistrationForm.password.$error" class="col-sm-12 help-block noPadding" role="alert">
+                    <div ng-message="required">Required field*</div>
+                    <div ng-message="pattern">Password must be minimum 6 characters and alphanumeric.</div>
+                  </div>
+                </label>
+                <label ng-if="current == 'first' && !user.socialType" ng-if="!user.socialType" class="item item-input item-input-custm item-stacked-label bdr-none">
+                  <span class="input-label txt-color bg-none input-label-custm">Confirm New Password</span>
+                  <input type="password" name="cPassword" class="bg-none input-custm" ng-model="registerObj.cPassword" ng-pattern='/^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z_@./#&+-]{6,}$/i' required>
+                  <div ng-messages="schoolRegistrationForm.cPassword.$error" class="col-sm-12 help-block noPadding" role="alert">
+                    <div ng-message="required">Required field*</div>
+                    <div ng-message="pattern">Password must be minimum 6 characters and alphanumeric.</div>
+                  </div>
+                </label>
+                <label ng-if="current == 'second' || user.socialType" class="item item-input item-input-custm item-stacked-label bdr-none">
+                  <span class="input-label txt-color bg-none input-label-custm">Company Name</span>
+                  <input type="text" name="companyName" placeholder="" class="bg-none input-custm"
+                         ng-model="registerObj.companyName" required>
+                  <div ng-messages="schoolRegistrationForm.companyName.$error" class="col-sm-12 help-block noPadding" role="alert">
+                    <div ng-message="required">Required field*</div>
+                  </div>
+                </label>
+                <label ng-if="current == 'second' || user.socialType" class="item item-input item-input-custm item-stacked-label bdr-none">
+                  <span class="input-label txt-color bg-none input-label-custm">Timezone</span>
+                </label>
+                <label ng-if="current == 'second' || user.socialType" class="item item-input item-input-custm item-stacked-label bdr-none">
+                  <timezone-selector class="bg-none input-custm tz-picker" ng-model="registerObj.timezone" width="100%" name="timezone" required></timezone-selector>
+                  <div ng-messages="schoolRegistrationForm.timezone.$error" class="col-sm-12 help-block noPadding" role="alert">
+                    <div ng-message="required">Required field*</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+        </div>
+  <!--
+        <div class="row">
+          <div class="col text-center">
+            <button class="button signin-btn button-calm" ui-sref="registrationSelection({user: registerObj})"
+                    style="background-color: #ffffff !important; color:#13A0DB;min-height: 40px;">Back
+            </button>
+          </div>
+        </div>
+  -->
+      <div ng-if="submitRegister">
+        <div class="col text-center" style="padding-top:20px">
+          <h2 class="txt-color">Activation Required</h2>
+        </div>
+        <div class="col text-left txt-color">
+          <p style="font-size: 15px;">To continue, </p><br>
+          <p style="font-size: 15px;">1. Please check the verification email that was sent to {{registerObj.email}}</p>
+          <p style="font-size: 15px;">2. Click on the Click Here to Verify button</p>
+          <p style="font-size: 15px;">3. Enter the PIN that was sent to {{registerObj.mobilePhone}} to activate your account</p><br>
+          <p style="font-size: 15px;" class="text-center">Auto redirect will happen in {{counter}} seconds</p><br>
+          <p style="font-size: 15px;" class="text-center">Your security and privacy is our priority.</p>
+        </div>
+      </div>
+    </ion-content>
+    <ion-footer-bar class="no-padding" ng-if="!submitRegister">
+      <div class="row">
+        <div ng-if="current == 'first'"  class="col text-center">
+          <button class="button signin-btn button-calm" ui-sref="registrationSelection({user: registerObj})"
+                  style="background-color: #ffffff !important; color:#13A0DB;min-height: 40px;">BACK
+          </button>
+        </div>
+        <div ng-if="current == 'first' && !user.socialType" class="col text-center">
+          <button class="button signin-btn button-calm" ng-click="showView('second', schoolRegistrationForm.$valid)"
+                  style="background-color: #ffffff !important; color:#13A0DB;min-height: 40px;">NEXT
+          </button>
+        </div>
+         <div ng-if="current == 'second' && !user.socialType" class="col text-center">
+          <button class="button signin-btn button-calm" ng-click="showView('first')"
+                  style="background-color: #ffffff !important; color:#13A0DB;min-height: 40px;">BACK
+          </button>
+        </div>
+        <div ng-if="current == 'second' || user.socialType" class="col text-center">
+          <button class="button signin-btn button-calm" type="button" ng-click="registerSchool(schoolRegistrationForm.$valid, schoolRegistrationForm)"
+                  style="background-color: #13A0DB !important;min-height: 40px;">REGISTER
+          </button>
+        </div>
+      </div>
+    </ion-footer-bar>  
+  </form>
+</ion-view>

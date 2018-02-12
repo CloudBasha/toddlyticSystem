@@ -1,0 +1,26 @@
+{
+  "name": "HelloIonic",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.3.2"
+  },
+  "dependencies": {
+    "angular-moment": "^1.0.1",
+    "moment": "^2.17.1",
+    "ionic-datepicker": "^1.2.1",
+    "angular-messages": "1.5.3",
+    "moment-timezone": "^0.5.13",
+    "angular-carousel": "^1.0.1",
+    "ionic-rating": "^0.3.0",
+    "angular-google-places-autocomplete": "^0.2.7",
+    "ng-cordova-oauth": "^0.3.0",
+    "ionic-social-buttons": "^1.1.1",
+    "jquery": "^3.2.1",
+    "onezone-datepicker": "*",
+    "google-libphonenumber": "^2.0.15",
+    "ionic-fancy-select": "*",
+    "ionic-timepicker": "^0.6.0",
+    "isoCurrency": "iso-currency#^0.2.7",
+    "plug.ionic-segment": "^0.0.3"
+  }
+}

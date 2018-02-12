@@ -1,0 +1,101 @@
+<ion-content class="bar-subheader-custm">
+  <div class="list">
+    <label class="item item-input">
+      <input name="actionTitle" type="text" placeholder="Title" id="actionTitle"
+             ng-model="addActionObj.title"/>
+    </label>
+    <label class="item item-input">
+              <textarea placeholder="Description" name="actionDescription" id="actionDesc"
+                        ng-model="addActionObj.actionDescription"></textarea>
+    </label>
+    <label class="item item-input item-select">
+      <div class="input-label">
+        Type
+      </div>
+      <select name="actionType" ng-model="addActionObj.actionType"
+              class="selectpicker col-sm-6 noPadding toddlyticSelect" data-style="infoInput"
+              title="Choose Type" ng-change="checkRequestType(addActionObj.actionType)">
+        <option value="" disabled selected>Choose Type</option>
+        <option value="Request Maintenance">Request Maintenance</option>
+        <option value="Request Purchase">Request Purchase</option>
+        <option value="Case">Case</option>
+        <option value="Task">Task</option>
+      </select>
+    </label>
+    <label class="item item-input" for="actionQty" ng-if="addActionObj.actionType == 'Request Purchase'">
+      <input name="actionTitle" placeholder="Quantity" type="text" name="actionQuantity" id="actionQty"
+             ng-model="addActionObj.quantity"/>
+    </label>
+    <label class="item item-input item-select">
+      <div class="input-label">
+        School
+      </div>
+      <select name="actionSchoolId" ng-change="selectRoomsBySchool(addActionObj.schoolId)"
+              ng-model="addActionObj.schoolId"
+              ng-options="school.school.schoolId as school.school.schoolName for school in schools"
+              class="selectpicker col-sm-6 noPadding toddlyticSelect" data-style="infoInput"
+              title="Choose School">
+        <option value="" disabled selected>Choose School</option>
+      </select>
+    </label>
+
+    <label class="item item-input item-select">
+      <div class="input-label">
+        Assigned To
+      </div>
+      <select name="actionAssignedTo" ng-model="addActionObj.contactId"
+              ng-options="staff.contactId as staff.name for staff in staffList"
+              class="selectpicker col-sm-6 noPadding toddlyticSelect"
+              data-style="infoInput" title="Choose Person">
+        <option value="" disabled selected>Choose Person</option>
+      </select>
+    </label>
+    <div class="item item-icon-right">
+      Due Date
+      <i class="icon" ng-click="openDatePicker()"><input class="col col-33" name="actionTitle" type="text"
+                                                         id="actionDueDate" disabled
+                                                         ng-model="action.date"
+                                                         style="min-width: 100%; text-align: right;padding-right: 37px; "/></i>
+    </div>
+    <label class="item item-input item-select">
+      <div class="input-label">
+        Importance
+      </div>
+      <select name="actionImportance" ng-model="addActionObj.importance"
+              class="selectpicker col-sm-6 noPadding toddlyticSelect" data-style="infoInput">
+        <!--<option value="" disabled>Choose Importance</option>-->
+        <option value="Low" selected>Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+    </label>
+
+    <label class="item item-input item-select" ng-if="showStatus">
+      <div class="input-label">
+        Status
+      </div>
+      <select name="status" ng-model="addActionObj.status"
+              class="selectpicker col-sm-6 noPadding toddlyticSelect" data-style="infoInput">
+        <option value="" disabled>Choose Status</option>
+        <option value="Pending">Pending</option>
+        <option value="Completed">Completed</option>
+        <option value="Delayed">Delayed</option>
+      </select>
+    </label>
+  </div>
+  <div class="padding-horizontal">
+    <div class="row">
+      <div class="col-50 padding-horizontal">
+        <button class="button button-block btn-theme" ui-sref="app.actions">
+          Cancel
+        </button>
+      </div>
+      <div class="col-50 padding-horizontal">
+        <button class="button button-block btn-theme" ng-click="createNewAction(buttonText)">
+          {{buttonText}}
+        </button>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

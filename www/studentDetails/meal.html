@@ -1,0 +1,23 @@
+<div class="list" ng-controller="studentDetailsPopupCtrl">
+    <label class="item item-input">
+        <span class="input-label">Milk</span>
+        <input type="number" placeholder="Milk in oz" ng-model="meal.milkQty" ng-disabled="disableMilk" ng-change="enableMealAndMenu(meal.milkQty)">
+    </label>
+    <label class="item item-input item-select">
+        <div class="input-label">
+            Food
+        </div>
+        <select ng-model="meal.menuId" ng-options="item.menu.menuId as item.menu.menuName for item in menuAndMealList"
+                ng-change="getMeals(meal.menuId)" ng-disabled="disable">
+            <option value="" disabled>Choose Menu</option>
+        </select>
+    </label>
+    <label class="item item-input item-select" disabled>
+        <div class="input-label">
+            Menu
+        </div>
+        <select ng-model="meal.mealId" ng-options="item.meal.mealId as item.meal.mealName for item in mealList" ng-disabled="disable">
+            <option value="" disabled>Choose Meal</option>
+        </select>
+    </label>
+</div>

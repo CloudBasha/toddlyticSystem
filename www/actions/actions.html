@@ -1,0 +1,124 @@
+<div class="clearfix"></div>
+<div class="tabs-striped tabs-top tabs-color-light" ng-if="loginResponse.type === 'ADMIN' || loginResponse.type === 'TEACHER'">
+  <div class="tabs bar-subheader-custm bar-custm" style="height: 44px !important;">
+    <a class="tab-item" ng-click="openApprovalsTab()" ng-class="appovalsClass">
+      My Approvals <span class="badge badgeCircle">{{pendingCounter}}</span>
+    </a>
+    <a class="tab-item" ng-click="openActionsTab()" ng-class="actionsClass">
+      My Actions <span class="badge badgeCircle">{{pendingActions.length}} </span>
+    </a>
+  </div>
+</div>
+<ion-content ng-class="contentClass">
+  <div ng-if="loginResponse.type === 'ADMIN'">
+    <div class="approvals" ng-if="appovalsTabActive">
+      <ion-item on-hold="holdItem(approval)" ng-click="approvalHeldItems.length ? holdItem(approval) : showApproval(approval)" class="item item-icon-left"
+         ng-repeat="approval in pendingApprovals | orderBy: '-approval.createdDate'" ng-class="{'gray-bg': approvalHeldItems.indexOf(approval) > -1}">
+        <i class="icon ion-pull-request"></i>
+
+        <h2 class="titleHeader">{{approval.approval.description}}</h2>
+
+        <p><span>{{approval.approval.createdDate | date:'medium'}}</span></p>
+        <div class="row no-padding">
+          <span ng-if="approval.approval.type == 'CREATE'">New</span>
+          <span ng-if="approval.approval.type == 'UPDATE'">Updated</span>
+          <span style="color: red;" ng-if="approval.approval.type == 'DELETE'">Deleted</span>
+        </div>
+        <p style="padding-top: 5px;" ng-if="loginResponse.type === 'ADMIN'"><span><button ng-hide="approvalHeldItems.length" class="button btn-custm-1" ng-click="$event.stopPropagation();requestApproveOrReject('Approved',approval)">
+          Approve
+        </button><button ng-hide="approvalHeldItems.length"
+          class="button btn-custm-2" ng-click="$event.stopPropagation();requestApproveOrReject('Rejected',approval)">
+          Reject
+        </button></span>
+<!--
+        <button class="button button-icon ion-edit pull-right" ng-click="$event.stopPropagation();showTrackingModal(approval)"></button>
+        </p>
+        <button ng-if="loginResponse.type === 'TEACHER'" class="button button-icon ion-edit pull-right" ng-click="$event.stopPropagation();showTrackingModal(approval)"></button>
+-->
+      </ion-item>      
+      <ion-infinite-scroll
+        ng-if="pendingApprovals.length % 50 == 0"
+        on-infinite="loadMore()">
+      </ion-infinite-scroll>
+    </div>
+    <div class="list" ng-if="actionsTabActive">
+      <a class="item item-icon-left item-icon-right"
+         ng-repeat="action in pendingActions | orderBy: '-request.sortDate'"
+         ng-click="openAction(action)">
+        <i class="icon ion-ios-flag"></i>
+
+        <h2>{{action.request.title}}</h2>
+
+        <p><span>{{action.request.status}}</span><span
+          class="padding-horizontal">{{action.request.dueDate}}</span>
+        </p>
+      </a>
+    </div>
+  </div>
+  
+  <div ng-if="loginResponse.type === 'TEACHER'">
+    <div class="approvals" ng-if="appovalsTabActive">
+      <ion-item class="item item-icon-left"
+         ng-repeat="approval in pendingApprovals | orderBy: '-approval.createdDate' track by $index" ng-class="{'gray-bg': approvalHeldItems.indexOf(approval) > -1}">
+        <i class="icon ion-pull-request"></i>
+
+        <h2 class="titleHeader">{{approval.approval.description}}</h2>
+
+        <p><span>{{approval.approval.createdDate | date:'medium'}}</span></p>        
+        <div class="row no-padding">
+          <span ng-if="approval.approval.type == 'CREATE'">New</span>
+          <span ng-if="approval.approval.type == 'UPDATE'">Updated</span>
+          <span style="color: red;" ng-if="approval.approval.type == 'DELETE'">Deleted</span>
+        </div>
+      </ion-item>
+      
+      <ion-item class="item item-icon-left"
+         ng-repeat="approval in completedApprovals | orderBy: '-approval.createdDate' track by $index" ng-class="{'gray-bg': approvalHeldItems.indexOf(approval) > -1}">
+        <i class="icon ion-pull-request"></i>
+
+        <h2 class="titleHeader">{{approval.approval.description}}</h2>
+
+        <p><span>{{approval.approval.createdDate | date:'medium'}}</span></p>
+        
+        <p ng-if="approval.approval.status == 'Rejected'"><span style="color:red">{{approval.approval.status}}</span></p>
+        <p ng-if="approval.approval.status == 'Approved'"><span style="color:green">{{approval.approval.status}}</span></p>
+      </ion-item>
+            
+      
+      <ion-infinite-scroll
+        ng-if="pendingApprovals.length % 50 == 0 || completedApprovals.length % 50 == 0"
+        on-infinite="loadMoreTeacher()">
+      </ion-infinite-scroll>
+    </div>
+    <div class="list" ng-if="actionsTabActive">
+      <a class="item item-icon-left item-icon-right"
+         ng-repeat="action in pendingActions | orderBy: '-request.sortDate'"
+         ng-click="openAction(action)">
+        <i class="icon ion-ios-flag"></i>
+
+        <h2>{{action.request.title}}</h2>
+
+        <p><span>{{action.request.status}}</span><span
+          class="padding-horizontal">{{action.request.dueDate}}</span>
+        </p>
+      </a>
+    </div>
+  </div>
+  
+  <div ng-if="loginResponse.type !== 'ADMIN' && loginResponse.type !== 'TEACHER'">
+    <div class="list">
+      <div class="item item-divider" style="margin-top: 14px; border-top: none; ">
+        My Actions
+      </div>
+      <a class="item item-icon-left item-icon-right"
+         ng-repeat="action in pendingActions | orderBy: '-request.sortDate'"
+         ng-click="openAction(action)">
+        <i class="icon ion-ios-flag"></i>
+        <h2>{{action.request.title}}</h2>
+        <p><span>{{action.request.status}}</span><span
+          class="padding-horizontal">{{action.request.dueDate}}</span>
+        </p>
+      </a>
+    </div>
+  </div>
+</ion-content>

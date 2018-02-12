@@ -1,0 +1,20 @@
+<ion-content class="padding parent-landing">
+    <div class="row row-wrap">
+        <div class="col-50 text-center" ui-sref="pApp.publicCalendar({publicCalendar : 'true'})">
+            <i class="icon-calendar homeIcons"></i>
+            <h3 class="text-center homeIconLabel">Events</h3>
+        </div>
+        <div class="col-50 text-center" ui-sref="pApp.kids">
+            <i class="icon-mykids homeIcons"></i>
+            <h3 class="text-center homeIconLabel">Kids</h3>
+        </div>
+        <div class="col-50 text-center" ng-click="goToState('pApp.schoolFinderMain')">
+            <i class="icon-school-finder homeIcons"></i>
+            <h3 class="text-center homeIconLabel">Nearby</h3>
+        </div>
+        <div class="col-50 text-center" ui-sref="pApp.appointments">
+            <i class="icon-appointments homeIcons"></i>
+            <h3 class="text-center homeIconLabel">Appointments</h3>
+        </div>
+    </div>
+</ion-content>

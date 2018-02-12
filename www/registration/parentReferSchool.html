@@ -1,0 +1,85 @@
+<form class="inviteSchool" name="schoolInvitationForm" ng-submit="referSchool(schoolInvitationForm.$valid)">
+  <ion-content class="bar-subheader-custm">
+      <div class="row responsive-sm login-form">
+          <div class="col">
+            <div class="list" align="center">
+              <label class="item item-input item-input-custm item-stacked-label bdr-none ">
+                <span class="input-label bg-none input-label-custm">School Name</span>
+                <input disabled type="text" name="schoolName" g-places-autocomplete ng-change="getGooglePlaceInfo(inviteObj.schoolName)" class="bg-none text-center"
+                       ng-model="inviteObj.schoolName" required>
+                <div ng-messages="schoolInvitationForm.schoolName.$error" class="col-sm-12 help-block noPadding" role="alert">
+                  <div ng-message="required">Required field*</div>
+                </div>
+              </label>
+              <label class="item item-input item-input-custm item-stacked-label bdr-none ">
+                <span class="input-label bg-none input-label-custm">Principal Name</span>
+                <input type="text" name="principalName" class="bg-none text-center"
+                       ng-model="inviteObj.principalName" required>
+                <div ng-messages="schoolInvitationForm.principalName.$error" class="col-sm-12 help-block noPadding" role="alert">
+                  <div ng-message="required">Required field*</div>
+                </div>
+              </label>
+              <label class="item item-input item-input-custm item-stacked-label bdr-none">
+                <span class="input-label bg-none input-label-custm">School Email</span>
+                <input type="email" ng-pattern='/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i' name="principalEmail" placeholder="" class="bg-none text-center" ng-model="inviteObj.principalEmail" required>
+                <div ng-messages="schoolInvitationForm.principalEmail.$error" class="col-sm-12 help-block noPadding" role="alert">
+                  <div ng-message="required">Required field*</div>
+                    <div ng-message="pattern">This is an invalid email address</div>
+                </div>
+              </label>
+              <label class="item item-input item-input-custm item-stacked-label bdr-none">
+                <span class="input-label bg-none input-label-custm">School Contact Number</span>
+                <input disabled type="text" name="contactNo" placeholder="" ng-pattern="/^[\d ()+-]+$/" class="bg-none text-center"
+                       ng-model="inviteObj.contactNo" required>
+                <div ng-messages="schoolInvitationForm.contactNo.$error" class="col-sm-12 help-block noPadding" role="alert">
+                  <div ng-message="required">Required field*</div>
+                  <div ng-message="pattern">This is not a valid telephone number</div>
+                </div>
+              </label>
+              <label class="item item-input item-input-custm item-stacked-label bdr-none">
+                <span class="input-label bg-none input-label-custm">School Address</span>
+                <input disabled type="text" name="schoolAddress" placeholder="" class="bg-none text-center"
+                       ng-model="inviteObj.schoolAddress" required>
+                <div ng-messages="schoolInvitationForm.schoolAddress.$error" class="col-sm-12 help-block noPadding" role="alert">
+                  <div ng-message="required">Required field*</div>
+                </div>
+              </label>
+<!--
+              <label class="item item-input item-input-custm item-stacked-label bdr-none ">
+                <span class="input-label bg-none input-label-custm">Parent Name</span>
+                <input type="text" name="parentName" class="bg-none text-center"
+                       ng-model="inviteObj.parentName" required>
+                <div ng-messages="schoolInvitationForm.parentName.$error" class="col-sm-12 help-block noPadding" role="alert">
+                  <div ng-message="required">Required field*</div>
+                </div>
+              </label>
+              <label class="item item-input item-input-custm item-stacked-label bdr-none">
+                <span class="input-label bg-none input-label-custm">Parent Email</span>
+                <input type="email" ng-pattern='/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i' name="parentEmail" placeholder="" class="bg-none text-center" ng-model="inviteObj.parentEmail" required>
+                <div ng-messages="schoolInvitationForm.parentEmail.$error" class="col-sm-12 help-block noPadding" role="alert">
+                  <div ng-message="required">Required field*</div>
+                    <div ng-message="pattern">This is an invalid email address</div>
+                </div>
+              </label>
+              <label class="item item-input item-input-custm item-stacked-label bdr-none">
+                <span class="input-label bg-none input-label-custm">Parent Contact Number</span>
+                <input type="text" name="parentContactNo" placeholder="" ng-pattern="/^[\d ()+-]+$/" class="bg-none text-center"
+                       ng-model="inviteObj.parentContactNo" required>
+                <div ng-messages="schoolInvitationForm.parentContactNo.$error" class="col-sm-12 help-block noPadding" role="alert">
+                  <div ng-message="required">Required field*</div>
+                  <div ng-message="pattern">This is not a valid telephone number</div>
+                </div>
+              </label>
+-->
+            </div>
+          </div>
+      </div>
+  </ion-content>
+  <ion-footer-bar>
+    <div class="row">
+      <div class="col text-center">
+        <button class="button signin-btn button-calm" type="submit">Submit</button>
+      </div>
+    </div>
+  </ion-footer-bar>  
+</form>

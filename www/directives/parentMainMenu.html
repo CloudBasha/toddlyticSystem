@@ -1,0 +1,87 @@
+<ion-side-menus>
+  <ion-side-menu-content edge-drag-threshold="true" drag-content="true">
+    <div class="bar bar-custm bar-header">
+      <button ng-show="!showBackButton" class="button navBarIcons button-icon txt-color" ng-click="toggleLeftMenu()">
+        <img class="baby" ng-src="./img/sidemenu-icon.svg">
+      </button>
+      <button ng-show="showBackButton" ng-click="goBack()" class="button navBarIcons button-icon txt-color"><i
+        class="icon ion-ios-arrow-left"></i>
+      </button>
+      <div class="h1 title">
+        <div class="stateName">{{stateName}}</div>
+      </div>
+      <button ng-if="stateName == 'Notifications' && loginResponse.type == 'ADMIN'" class="button navBarIcons button-icon txt-color" ui-sref="app.composer"><i class="icon ion-ios-plus-outline"></i></button>
+      <button ng-if="stateName == 'Actions'" class="button button-icon txt-color" ng-click="openAction('')"><i
+        class="icon ion-ios-plus-outline"></i></button>
+      <button ng-if="stateName == 'Gallery' && loginResponse.type =='ADMIN'" class="button navBarIcons button-icon txt-color" ng-click="takePicture()"><i class="icon ion-ios-camera-outline"></i></button>
+      <button ng-if="stateName == 'Photos'" class="button navBarIcons button-icon txt-color" ng-click="changePhotosGrid()"><i class="icon ion-grid"></i></button>
+      <button ng-if="stateName == 'School Finder'" class="button navBarIcons sortPlacesIcon button-icon txt-color" ui-sref="pApp.inviteSchool"><i class="icon ion-plus"></i></button>
+      <button ng-if="stateName == 'Select Albums'" class="button navBarIcons button-icon txt-color" ng-click="sendPhotoToAlbum(getAlbum.Id)">Save</button>
+      <button ng-if="stateName == 'Health Check'" class="button navBarIcons button-icon txt-color" ng-click="saveHealthCheck()">Save</button>
+      <button ng-if="((stateName == 'Newsfeed' || stateName == 'Billing' || stateName == 'Calendar' || stateName == 'Albums' || stateName == 'Notifications') && haveChild) && type == 'PARENT'" class="button navBarIcons button-icon txt-color" ng-click="openPopover($event)">
+        <img class="favorite-student" ng-if="favoriteStudent.photoUrl" ng-src="{{checkImageUrl(favoriteStudent.photoUrl)}}">
+        <img class="favorite-student" ng-if="!favoriteStudent.photoUrl" src="img/defaultAvatar.jpg">
+      </button>
+      <button ng-if="stateName == 'My Profile'" class="button button-icon txt-color" ng-click="goToState('pApp.settings')"><i class="icon ion-settings"></i></button>
+      <button ng-if="stateName == 'My Kids' && type == 'PARENT'" class="button navBarIcons button-icon txt-color" ui-sref="pApp.kid({kid: null, adding: true})">
+        <i class="icon ion-person-add"></i>
+      </button>
+    </div>
+    <ion-nav-view name="ParentMainMenuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-content>
+      <ion-list>
+        <div class="sidemenu">
+          <ion-item style="padding-bottom: 10px;">
+            <a class="item-avatar" menu-toggle ng-click="goToState('pApp.profile')">
+              <img class="avatar" ng-src="{{profilePicUrl}}" ng-if="profilePicUrl != null">
+              <img class="avatar" ng-src="./img/defaultAvatar.jpg" ng-if="profilePicUrl == null">
+            </a>
+
+            <div class="clearfix"></div>
+            <h2>Hello {{userName}}</h2>
+          </ion-item>
+          <div class="list-item">
+            <a class="tab-item padding-vertical" menu-toggle ng-click="goToState('pApp.parentLanding')">
+              <img class="icon" ng-src="./img/home.svg">
+              Home
+            </a>
+            <a ng-show="haveChild" class="tab-item padding-vertical" menu-toggle ng-click="goToState('pApp.newsfeed')">
+              <img class="icon" ng-src="./img/newsfeed.svg">
+              Newsfeed
+            </a>
+            <a ng-show="haveChild" class="tab-item padding-vertical" menu-toggle ng-click="goToState('pApp.notifications')">
+              <img class="icon" ng-src="./img/notification.svg">
+              Notification
+            </a>
+            <a ng-show="haveChild" class="tab-item padding-vertical" menu-toggle ng-click="goToState('pApp.calendar')">
+              <i class="icon icon-calander"></i>
+              Calendar
+            </a>
+            <a ng-show="haveChild" class="tab-item padding-vertical" menu-toggle ng-click="goToState('pApp.albums')">
+              <img class="icon" ng-src="./img/photos.svg">
+              Photos
+            </a>
+            <a ng-show="haveChild" class="tab-item padding-vertical" menu-toggle ng-click="goToState('pApp.billing')">
+              <i class="icon icon-billing"></i>
+              Billing
+            </a>
+<!--
+
+            <a class="tab-item padding-vertical" menu-toggle ng-click="goToState('pApp.settings')">
+              <i class="icon ion-settings"></i>
+              Settings
+            </a>
+-->
+            <a class="tab-item padding-vertical" menu-toggle ng-click="logout()">
+              <i class="icon ion-log-out"></i>
+              Logout
+            </a>
+          </div>
+        </div>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

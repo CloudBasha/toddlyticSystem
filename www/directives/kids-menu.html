@@ -1,0 +1,14 @@
+<ion-popover-view class="kids-menu">
+    <ion-header-bar align-title="center">
+      <h1 class="title">Kids</h1>
+    </ion-header-bar>
+    <ion-content class="kidsMenuScroll">
+      <div class="list">
+        <a ng-click="setFavoriteStudent(student)" class="item item-avatar" ng-repeat="student in students" ng-class="{'selectedStudentHighlight': student.studentId == favStudentId }">
+            <img ng-if="student.photoUrl !== null" ng-src="{{checkImageUrl(student.photoUrl)}}">
+            <img ng-if="student.photoUrl == null" ng-src="img/defaultAvatar.jpg">
+            <h3 class="text-center">{{ student.name }}</h3>
+        </a>
+      </div>
+    </ion-content>
+</ion-popover-view>

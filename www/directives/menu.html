@@ -1,0 +1,50 @@
+<ion-side-menu side="left">
+  <ion-content>
+    <ion-list>
+      <div class="sidemenu">
+        <ion-item>
+          <a class="item-avatar">
+            <img class="avatar" ng-src="{{checkImageUrl(profilePicUrl)}}" ng-if="profilePicUrl != null">
+            <img class="avatar" ng-src="./img/defaultAvatar.jpg" ng-if="profilePicUrl == null">
+          </a>
+
+          <div class="clearfix"></div>
+          <h2>Hello {{userName}}</h2>
+        </ion-item>
+        <div class="list-item">
+          <a class="tab-item padding-vertical" menu-toggle ui-sref="newsfeed">
+            <img class="icon" ng-src="./img/newsfeed.svg">
+            Newsfeed
+          </a>
+          <a class="tab-item padding-vertical" menu-toggle ui-sref="notifications">
+
+            <img class="icon" ng-src="./img/notification.svg">
+            Notification
+          </a>
+          <a class="tab-item padding-vertical" menu-toggle ui-sref="actions">
+            <img class="icon" ng-src="./img/actions.svg">
+            Actions
+          </a>
+          <a class="tab-item padding-vertical" menu-toggle ui-sref="people" ng-if="userType !== 'Staff'">
+            <img class="icon" ng-src="./img/people.svg">
+            People
+          </a>
+          <a class="tab-item padding-vertical" menu-toggle ui-sref="albums">
+
+            <img class="icon" ng-src="./img/photos.svg">
+            Albums
+          </a>
+          <a class="tab-item padding-vertical" menu-toggle ui-sref="schoolFinderMain">
+
+            <img class="icon" ng-src="./img/photos.svg">
+            School Finder
+          </a>
+          <a class="tab-item padding-vertical" menu-toggle ng-click="logout()">
+            <i class="icon ion-log-out"></i>
+            Logout
+          </a>
+        </div>
+      </div>
+    </ion-list>
+  </ion-content>
+</ion-side-menu>

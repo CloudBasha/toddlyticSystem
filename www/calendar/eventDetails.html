@@ -1,0 +1,32 @@
+<ion-modal-view>
+  <ion-header-bar class="bar toddlyticModalBar text-center">
+    <h1 class="title padding-top" style="text-align: center">{{ eventDetails.eventTitle }}</h1>
+    <button class="button closeButton icon" ng-click="closeModal()">
+        <i class="icon ion-close"></i>
+    </button>
+  </ion-header-bar>
+  <ion-content class="padding eventDetails">
+     <div class="list">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Date</span>
+        <input type="text" name="name" ng-model="eventDetails.eventDate" ng-readOnly="true">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Start Time</span>
+        <input type="text" name="name" ng-model="eventDetails.startTime" ng-readOnly="true">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">End Time</span>
+        <input type="text" name="name" ng-model="eventDetails.endTime" ng-readOnly="true">
+      </label>
+      <label ng-if="eventDetails.meal" class="item item-input item-stacked-label">
+        <span class="input-label">Meal</span>
+        <input type="text" name="name" ng-model="eventDetails.meal" ng-readOnly="true">
+      </label>
+      <label ng-if="eventDetails.notes" class="item item-input item-stacked-label">
+        <span class="input-label">Notes</span>
+        <input type="text" name="name" ng-model="eventDetails.notes" ng-readOnly="true">
+      </label>
+    </div>
+  </ion-content>
+</ion-modal-view>

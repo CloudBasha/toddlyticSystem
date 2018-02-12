@@ -1,0 +1,93 @@
+<ion-side-menus>
+  <ion-side-menu-content edge-drag-threshold="true" drag-content="true">
+    <div class="bar bar-custm bar-header">
+      <button ng-show="showBackButton" ng-click="goBack()" class="button button-icon txt-color"><i
+        class="icon ion-ios-arrow-left"></i>
+      </button>
+      <button ng-show="!showBackButton" class="button button-icon txt-color" ng-click="toggleLeftMenu()">
+        <img class="baby" ng-src="./img/sidemenu-icon.svg">
+      </button>
+      <div class="h1 title">
+        <div class="stateName">{{stateName}}</div>
+      </div>
+
+      <button class="button button-icon txt-color" ng-if="stateName == 'Notifications' && currentState.name == 'app.composer' && showResendNoticationButton" ng-click="showAlert(notifyType)">
+        <i class="icon ion-ios-refresh-empty"></i>
+      </button>
+      <button ng-if="stateName == 'Notifications' && currentState.name != 'app.composer'" class="button button-icon txt-color" ui-sref="app.composer"><i class="icon ion-ios-plus-outline"></i></button>
+      <button ng-if="stateName == 'Actions' && !approvalHeldItems.length" class="button button-icon txt-color" ng-click="openAction('')"><i
+        class="icon ion-ios-plus-outline"></i></button>
+      <button ng-if="stateName == 'Actions' && approvalHeldItems.length" class="button button-icon txt-color" ng-click="approveRejectAll()"><i
+        class="icon ion-wand"></i></button>
+<!--      <button ng-if="stateName == 'Gallery'" class="button button-icon txt-color" ng-click="takePicture()"><i class="icon ion-ios-camera-outline"></i></button>-->
+      <button ng-if="stateName == 'Photos'" class="button button-icon txt-color" ng-click="changePhotosGrid()"><i class="icon ion-grid"></i></button>
+      <button ng-if="stateName == 'Gallery'" class="button button-icon txt-color" ng-click="showImageOptions()"><i class="icon ion-ios-camera-outline"></i></button>
+      <button ng-if="stateName == 'Select Albums'" class="button button-icon txt-color" ng-disabled="disableSave" ng-click="sendPhotoToAlbum(getAlbum.Id)">Save</button>
+      <button ng-if="stateName == 'Health Check'" class="button button-icon txt-color" ng-click="saveHealthCheck()">Save</button>
+      <button ng-if="stateName == 'Getting Started'" class="button button-icon txt-color" ng-click="skip()">skip</button>
+      <button ng-if="stateName == 'People' && heldItems.length" class="button button-icon txt-color" ng-click="itemsAlert()"><img ng-src="./img/compassWhite.svg"></button>
+      <button ng-if="stateName == 'My Profile'" class="button button-icon txt-color" ng-click="goToState('app.settings')"><i class="icon ion-settings"></i></button>
+    </div>
+    <ion-nav-view name="MainMenuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-content>
+      <ion-list>
+        <div class="sidemenu">
+          <ion-item style="padding-bottom: 10px;">
+            <a class="item-avatar" menu-toggle ng-click="goToState('app.profile')">
+              <img class="avatar" ng-src="{{checkImageUrl(profilePicUrl)}}" ng-if="profilePicUrl != null">
+              <img class="avatar" ng-src="./img/defaultAvatar.jpg" ng-if="profilePicUrl == null">
+            </a>
+
+            <div class="clearfix"></div>
+            <h2>Hello {{userName}}</h2>
+          </ion-item>
+          <div class="list-item">
+            <a class="tab-item padding-vertical" menu-toggle ng-click="goToState('app.newsfeed')">
+              <img class="icon" ng-src="./img/newsfeed.svg">
+              Newsfeed
+            </a>
+            <a class="tab-item padding-vertical" menu-toggle ng-click="goToState('app.notifications')">
+
+              <img class="icon" ng-src="./img/notification.svg">
+              Notification
+            </a>
+            <a class="tab-item padding-vertical" menu-toggle ng-click="goToState('app.actions')">
+              <img class="icon" ng-src="./img/actions.svg">
+              Actions
+            </a>
+            <a class="tab-item padding-vertical" menu-toggle ng-click="goToState('app.people')" ng-if="userType !== 'Staff'">
+              <img class="icon" ng-src="./img/people.svg">
+              People
+            </a>
+            <a class="tab-item padding-vertical" menu-toggle ng-click="goToState('app.albums')">
+
+              <img class="icon" ng-src="./img/photos.svg">
+              Gallery
+            </a>
+<!--
+            <a class="tab-item padding-vertical" menu-toggle ng-click="goToState('app.settings')">
+
+              <i class="icon ion-settings"></i>
+              Settings
+            </a>
+-->
+<!--
+            <a class="tab-item padding-vertical" menu-toggle ng-click="goToState('app.schoolFinderMain')">
+
+              <img class="icon" ng-src="./img/photos.svg">
+              School Finder
+            </a>
+-->
+            <a class="tab-item padding-vertical" menu-toggle ng-click="logout()">
+              <i class="icon ion-log-out"></i>
+              Logout
+            </a>
+          </div>
+        </div>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

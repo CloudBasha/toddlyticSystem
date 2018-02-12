@@ -1,0 +1,173 @@
+<ion-content class="has-header profile">
+    <div class="row padding">
+        <div class="col padding-vertical text-center" ng-click="show()">
+            <img class="avatar" ng-src="{{profilePic}}" ng-if="profilePic">
+            <img class="avatar" ng-src="./img/defaultAvatar.jpg" ng-if="!profilePic">
+        </div>
+    </div>
+    <div class="row padding-right">
+        <div class="col">
+          <form name="profileForm">
+            <div class="list">
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Name</span>
+                <input type="text" placeholder="John" name="name" ng-model="profile.name" required>
+                <div ng-messages="profileForm.name.$error" class="col-sm-12 help-block noPadding" role="alert">
+                  <div ng-message="required">Required field*</div>
+                </div>
+              </label>
+              <label class="item item-input item-stacked-label pb-20">
+                <span class="input-label">Email</span>
+                <input type="text" placeholder="john@suhr.com" readonly="" ng-model="profile.email">
+              </label>
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">Mobile Phone</span>
+                <input type="text" placeholder="+60112345678" name="phone" ng-pattern="/^\+(?:[0-9] ?){6,14}[0-9]$/i" ng-model="profile.mobile" required>
+                <div ng-messages="profileForm.phone.$error" class="col-sm-12 help-block noPadding" role="alert">
+                  <div ng-message="required">Required field*</div>
+                  <div ng-message="pattern">This is an invalid phone number</div>
+                </div>
+              </label>
+              <label ng-show="loginResponse.type == 'PARENT'"  class="item item-input item-stacked-label">
+                <span class="input-label">Home Phone</span>
+                <input type="text" placeholder="+60112345678" name="homePhoneName" ng-pattern="/^\+(?:[0-9] ?){6,14}[0-9]$/i" ng-model="profile.homePhone">
+                <div ng-messages="profileForm.homePhoneName.$error" class="col-sm-12 help-block noPadding" role="alert">
+                  <div ng-message="required">Required field*</div>
+                  <div ng-message="pattern">This is an invalid phone number</div>
+                </div>
+              </label>
+              <label class="item item-input item-stacked-label pb-20">
+                <span class="input-label">Designation</span>
+                <input type="text" placeholder="eg. Job Title" ng-model="profile.designation">
+              </label>
+              <label class="item item-input item-stacked-label pb-20">
+                <span class="input-label">ID No</span>
+                <input type="text" placeholder="1111222233" ng-model="profile.identificationNo">
+              </label>
+              <label ng-show="loginResponse.type == 'PARENT'" class="item item-input item-stacked-label pb-20">
+                <span class="input-label">Nationality</span>
+                <input type="text" placeholder="Malaysian" ng-model="profile.nationality">
+              </label>
+              <label ng-click="homeAddressModal.show()" class="item item-input item-stacked-label textarealabel pb-20">
+                <span class="input-label">Home Address</span>
+                <textarea ng-readonly="true" rows="3" placeholder="Home Address" ng-model="homeAddress" class="textArea"></textarea>
+              </label>
+              <label ng-click="officeAddressModal.show()" ng-show="loginResponse.type == 'PARENT'" class="item item-input item-stacked-label textarealabel pb-20">
+                <span class="input-label">Office Address</span>
+                <textarea rows="3" ng-readonly="true" placeholder="Office Address" ng-model="officeAddress" class="textArea"></textarea>
+              </label>
+              <label ng-show="loginResponse.type == 'PARENT'" class="item item-input item-select pb-20">
+                <div class="input-label">
+                  Relationship
+                </div>
+                <select ng-model="profile.relationship">
+                  <option value="Father">Father</option>
+									<option value="Mother">Mother</option>
+									<option value="Brother">Brother</option>
+									<option value="Sister">Sister</option>
+									<option value="Uncle">Uncle</option>
+									<option value="Aunt">Aunt</option>
+									<option value="Grandfather">Grandfather</option>
+									<option value="Grandmother">Grandmother</option>
+									<option value="Guardian">Guardian</option>
+                </select>
+              </label>
+<!--
+              <label class="item item-input item-stacked-label">
+                <span class="input-label">User Type</span>
+                <input type="text" placeholder="eg. Parent" ng-model="profile.type" readonly="">
+              </label>
+-->
+              <div class="pt-20 text-center">
+                <button class="button signin-btn button-calm" ng-click="update_info()">Save</button>
+              </div>
+            </div>
+          </form>
+        </div>
+    </div>
+    <!-- <div class="row padding">
+        <div class="col text-center">
+            <h3 class="calm padding-top">
+                <i class="icon ion-bag"></i> Pay Amount
+            </h3>
+            <button class="button button-clear button-dark">View the full invoice</button>
+        </div>
+    </div> -->
+</ion-content>
+
+<script id="homeAddress.html" type="text/ng-template">
+  <ion-modal-view class="homeAddressModal">
+    <ion-content class="padding addressEditModalContent">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Address 1</span>
+        <input type="text" placeholder="Address Line 1" ng-model="profile.address1">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Address 2</span>
+        <input type="text" placeholder="Address Line 2" ng-model="profile.address2">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">City</span>
+        <input type="text" placeholder="eg. Kuala Lumpur" ng-model="profile.city">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Postcode</span>
+        <input type="text" placeholder="eg. 12345" ng-model="profile.postCode">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">State</span>
+        <input type="text" placeholder="eg. Selangor" ng-model="profile.state">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Country</span>
+        <input type="text" placeholder="eg. Malaysia" ng-model="profile.country">
+      </label>
+    </ion-content>
+    <ion-footer-bar>
+      <div class="row">
+        <div class="col text-center padding">
+            <button class="button signin-btn button-calm" ng-click="closeHomeModal()">Save</button>
+        </div>
+      </div>
+    </ion-footer-bar>
+  </ion-modal-view>
+</script>
+
+<script id="officeAddress.html" type="text/ng-template">
+  <ion-modal-view class="officeAddressModal">
+    <ion-content class="padding addressEditModalContent">
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Address 1</span>
+        <input type="text" placeholder="Address Line 1" ng-model="profile.officeAddress1">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Address 2</span>
+        <input type="text" placeholder="Address Line 2" ng-model="profile.officeAddress2">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">City</span>
+        <input type="text" placeholder="eg. Kuala Lumpur" ng-model="profile.officeCity">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Postcode</span>
+        <input type="text" placeholder="eg. 12345" ng-model="profile.officePostCode">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">State</span>
+        <input type="text" placeholder="eg. Selangor" ng-model="profile.officeState">
+      </label>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Country</span>
+        <input type="text" placeholder="eg. Malaysia" ng-model="profile.officeCountry">
+      </label>
+    </ion-content>
+    <ion-footer-bar>
+      <div class="row">
+        <div class="col text-center padding">
+            <button class="button signin-btn button-calm" ng-click="closeOfficeModal()">Save</button>
+        </div>
+      </div>
+    </ion-footer-bar>
+  </ion-modal-view>
+</script>
+

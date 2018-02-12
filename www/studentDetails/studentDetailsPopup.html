@@ -1,0 +1,94 @@
+<ion-content class="bar-subheader-custm">
+    <div class="list">
+        <a ng-show="!showTimer" class="item item-icon-left item-icon-right">
+            <i class="icon ion-android-checkmark-circle" style="color:#13A0DB"></i>
+            Attendance
+            <i class="icon">
+              <button class="button success-bg" style="min-height: 33px;line-height: 29px;margin-right: 10px;"
+                      ng-click="takeAttendance('CheckIn')">
+                  Check In
+              </button>
+              <button class="button" style="min-height: 33px;line-height: 29px;background-color: red;color: #ffffff"
+                      ng-click="takeAttendance('CheckOut')">
+                  Check Out
+              </button>
+            </i>
+        </a>
+        <a class="item item-icon-left item-icon-right">
+            <i class="icon"><img ng-src="./img/hygiene.svg"></i>
+            Hygiene
+            <i class="icon">
+                <button class="button success-bg" style="min-height: 33px;line-height: 29px"
+                        ng-click="hygienePopup()">
+                    Enter
+                </button>
+            </i>
+        </a>
+        <a class="item item-icon-left item-icon-right">
+            <i class="icon"><img ng-src="./img/bottlefeeding.svg" style="padding-left: 5px;"></i>
+            Meal
+            <i class="icon">
+                <button class="button success-bg" style="min-height: 33px;line-height: 29px"
+                        ng-click="mealPopup()">
+                    Enter
+                </button>
+            </i>
+        </a>
+        <a class="item item-icon-left item-icon-right">
+            <i class="icon"><img ng-src="./img/medications.svg"></i>
+            Medication
+            <i class="icon">
+                <button class="button success-bg" style="min-height: 33px;line-height: 29px"
+                        ng-click="medicationPopup()">
+                    Enter
+                </button>
+            </i>
+        </a>
+        <a class="item item-icon-left item-icon-right">
+            <i class="icon"><img ng-src="./img/healthcheck.svg"></i>
+            Health Check
+            <i class="icon">
+                <button class="button success-bg" style="min-height: 33px;line-height: 29px"
+                        ng-click="openHealthCheck()">
+                    Enter
+                </button>
+            </i>
+        </a>
+        <a ng-show="showTimer" class="item item-icon-left item-icon-right" style="border-bottom: none">
+            <i class="icon"><img ng-src="./img/sleepometer.svg"></i>
+            Sleepometer
+            <i class="icon">
+                <button class="button success-bg" style="min-height: 33px;line-height: 29px;"
+                        ng-click="startOrStopTimer(buttonText)" ng-if="buttonText == 'Start'">
+                    {{buttonText}}
+                </button>
+                <button class="button"
+                        style="min-height: 33px;line-height: 29px;background-color: red;color: #ffffff"
+                        ng-click="startOrStopTimer(buttonText)" ng-if="buttonText == 'Stop'">
+                    {{buttonText}}
+                </button>
+            </i>
+        </a>
+        <a ng-show="!showTimer" class="item item-icon-left item-icon-right" style="border-bottom: none">
+            <i class="icon"><img ng-src="./img/sleepometer.svg"></i>
+            Sleepometer
+            <i class="icon">
+                <button class="button success-bg" style="min-height: 33px;line-height: 29px;margin-right: 10px;"
+                        ng-click="startOrStopTimer('Start')">Start
+                </button>
+                <button class="button"
+                        style="min-height: 33px;line-height: 29px;background-color: red;color: #ffffff"
+                        ng-click="startOrStopTimer('Stop')">Stop
+                </button>
+            </i>
+        </a>
+        <a ng-show="showTimer" class="item" style="border-top: none">
+          <div class="card">
+            <div class="item item-text-wrap" style="text-align: center !important;" ng-bind="timer">
+
+            </div>
+          </div>
+        </a>
+    </div>
+
+</ion-content>

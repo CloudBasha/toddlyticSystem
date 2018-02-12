@@ -1,0 +1,31 @@
+<ion-content class="bar-subheader-custm">
+  <li class="item">
+    <div class="list">
+      <label class="item item-input" style="width: 85%; float: left">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input ng-change="getSchools(myScopeVar)" type="text" g-places-autocomplete ng-model="myScopeVar" />
+      </label>
+      <button ng-if="stateName == 'School Finder'" style="padding: 0 26px" class="button navBarIcons sortPlacesIcon button-icon" ng-click="openSortingPopover($event)"><i class="fa fa-sort"></i></button>
+    </div>
+  </li>
+  <div class="storesMapContainer">
+    <div id="storesMap"></div>
+  </div>
+  <div class="schoolListContainer">
+    <ul class="list">
+      <li ng-click="goToSchool(location)" class="item" ng-repeat="location in locations">
+        <div class="displayFlex">
+          <div style="white-space: normal;" class="col-75">{{location.name}}</div>
+          <div align="right" class="col-25" ng-if="distanceToLocation != 1">{{location.distanceToLocation}}kms</div>
+          <div align="right" class="col-25" ng-if="distanceToLocation == 1">{{location.distanceToLocation}}km</div>
+        </div>
+        <div class="col">
+          <div class="col" style="white-space : initial;">{{location.formatted_address}}</div>
+        </div>
+        <div ng-if="location.rating != undefined" class="col padding-top">
+          <rating class="rating" ng-model="location.rating" readonly="true" max="5"></rating>
+        </div>
+      </li>
+    </ul>
+  </div>
+</ion-content>

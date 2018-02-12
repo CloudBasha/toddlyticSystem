@@ -1,0 +1,217 @@
+<ion-content class="getting-started">
+  <ion-slide-box ng-init="lockSlide()" on-slide-changed="slideHasChanged($index)" show-pager="false">
+    <ion-slide>
+      <div class="row">
+        <div class="col">
+          <h3 class="text-center padding-top">School Information</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="list">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">School Name</span>
+              <input type="text" g-places-autocomplete class="inputLineDark" ng-change="getGooglePlaceInfo(school.name)" placeholder="" ng-model="school.name">
+              <div class="input-label-error" ng-show="showError && !school.name">Required Field</div>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Program Name</span>
+              <input type="text" placeholder="" class="inputLineDark" ng-model="school.program_name">
+              <div class="input-label-error" ng-show="showError && !school.program_name">Required Field</div>
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Age</span>
+              <div class="row">
+               <div class="col-40">
+                 <label class="item item-input item-select selectMinHeight">
+                    <select ng-model="school.ageFrom.years" class="fullSelectWidth">
+                      <option value="1">0 Months</option>
+                      <option value="2">6 Months</option>
+                      <option value="3">12 Months</option>
+                      <!-- <option value="4">1 Year</option> -->
+                      <option value="4">2 Years</option>
+                      <option value="5">3 Years</option>
+                      <option value="6">4 Years</option>
+                      <option value="7">5 Years</option>
+                      <option value="8">6 Years</option>
+                      <option value="9">7 Years</option>
+                    </select>
+                  </label>
+                </div>
+                <div class="col-20 text-center">
+                  <span>To</span>
+                </div>
+                <div class="col-40">
+                  <label class="item item-input item-select selectMinHeight">
+                    <select ng-model="school.ageTo.years" class="fullSelectWidth">
+                      <option value="1">0 Months</option>
+                      <option value="2">6 Months</option>
+                      <option value="3">12 Months</option>
+                      <!-- <option value="4">1 Year</option> -->
+                      <option value="4">2 Years</option>
+                      <option value="5">3 Years</option>
+                      <option value="6">4 Years</option>
+                      <option value="7">5 Years</option>
+                      <option value="8">6 Years</option>
+                      <option value="9">7 Years</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="row submitButtons">
+        <div class="col text-center">
+          <button class="button signin-btn button-calm" ng-click="schoolDetails()">Next</button>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div class="row">
+        <div class="col">
+          <h3 class="text-center padding-top">Add Students</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+<!--
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">School Name</span>
+              <input type="text" ng-model="school.name" ng-disabled="true">
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Program Name</span>
+              <input type="text" ng-model="school.program_name" ng-disabled="true">
+            </label>
+-->
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Student Name</span>
+              <input type="text" class="inputLineDark" ng-model="student.name">
+            </label>
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">Date of Birth</span>
+              <input type="text" class="inputLineDark" ng-model="student.dob" ng-click="openDatePicker()" ng-readonly="true">
+            </label>
+<!--
+            <div class="text-center padding-top">
+              <button type="button" class="button button-balanced signin-btn" ng-click="addStudent()">Add Student</button>
+            </div>
+-->
+            <div class="list student-list">
+              <h4 class="padding-top">Students</h4>
+              <span ng-hide="school.student_list.length">Please add atleast one student</span>
+              <div class="item item-button-right" ng-repeat="student in school.student_list track by $index">
+                  <span>{{ student.name }}</span>
+                  <span>{{ student.dob }}</span>
+                  <button class="button button-clear button-positive" ng-click="removeStudent($index)">
+                    <i class="icon ion-close"></i>
+                  </button>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="row submitButtons">
+        <div class="col text-center">
+          <button class="button button-calm signin-btn" ng-click="back()">Back</button>
+        </div>
+        <div class="col text-center">
+          <button class="button button-calm signin-btn" ng-disabled="!school.student_list.length" ng-click="studentDetails()">Next</button>
+        </div>
+      </div>
+
+    </ion-slide>
+    <ion-slide>
+      <div class="row">
+        <div class="col text-center">
+          <h3>Summary</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-center">
+          <div class="list">
+
+            <div class="item item-divider">
+              School
+            </div>
+            <label class="item item-input">
+              <span class="input-label">School Name</span>
+              <input type="text" ng-model="school.name" disabled="true">
+            </label>
+
+            <div class="item item-divider">
+              Program
+            </div>
+            <label class="item item-input">
+              <span class="input-label">Program Name</span>
+              <input type="text" ng-model="school.program_name" disabled="true">
+            </label>
+            <label class="item item-input">
+              <span class="input-label">Start Age</span>
+              <div class="col">
+               <label class="item item-input item-select selectMinHeight">
+                  <select ng-model="school.ageFrom.years" class="fullSelectWidth" disabled="true">
+                    <option value="1">0 Months</option>
+                    <option value="2">6 Months</option>
+                    <option value="3">12 Months</option>
+                    <!-- <option value="4">1 Year</option> -->
+                    <option value="4">2 Years</option>
+                    <option value="5">3 Years</option>
+                    <option value="6">4 Years</option>
+                    <option value="7">5 Years</option>
+                    <option value="8">6 Years</option>
+                    <option value="9">7 Years</option>
+                  </select>
+                </label>
+              </div>
+            </label>
+            <label class="item item-input">
+              <span class="input-label">End Age</span>
+              <div class="col">
+               <label class="item item-input item-select selectMinHeight">
+                  <select ng-model="school.ageTo.years" class="fullSelectWidth" disabled="true">
+                    <option value="1">0 Months</option>
+                    <option value="2">6 Months</option>
+                    <option value="3">12 Months</option>
+                    <!-- <option value="4">1 Year</option> -->
+                    <option value="4">2 Years</option>
+                    <option value="5">3 Years</option>
+                    <option value="6">4 Years</option>
+                    <option value="7">5 Years</option>
+                    <option value="8">6 Years</option>
+                    <option value="9">7 Years</option>
+                  </select>
+                </label>
+              </div>
+            </label>
+
+            <div class="item item-divider">
+              Students
+            </div>
+            <div class="summary-student-list">
+              <div ng-repeat="student in school.student_list">
+                <label class="item item-input">
+                <span class="input-label">Student Name</span>
+                <input type="text" ng-model="student.name" disabled="true">
+                </label>
+                <label class="item item-input">
+                  <span class="input-label">Date of Birth</span>
+                  <input type="text" ng-model="student.dob" disabled="true">
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row submitButtons">
+        <div class="col text-center">
+          <button class="button button-calm signin-btn" ng-disabled="!school.student_list.length" ng-click="back()">Back</button>
+        </div>
+        <div class="col text-center">
+          <button class="button signin-btn button-calm" ng-click="submit()">Launch</button>
+        </div>
+      </div>
+    </ion-slide>
+  </ion-slide-box>
+</ion-content>

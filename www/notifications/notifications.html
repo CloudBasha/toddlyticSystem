@@ -1,0 +1,109 @@
+<div class="clearfix"></div>
+<div ng-if="loginResponse.type === 'ADMIN' || loginResponse.type === 'TEACHER'" class="tabs-striped tabs-top tabs-color-light">
+  <div class="tabs bar-subheader-custm bar-custm" style="height: 44px !important;">
+    <a class="tab-item" ng-click="openReceiveTab()" ng-class="active2">
+      Recieved <span class="badge badgeCircle">{{unReadCount}} </span>
+    </a>
+    <a class="tab-item" ng-click="openSentTab()" ng-class="active1">
+      Sent
+    </a>
+  </div>
+</div>
+<ion-content>
+  <div ng-if="loginResponse.type == 'ADMIN' || loginResponse.type === 'TEACHER'" class="has-header-custm notification-wrap">
+    <div class="list" ng-if="receiveTabActive">
+      <a class="item item-icon-left item-icon-right" ng-repeat="item in receiveNotifications | orderBy: '-date'"
+         ng-click="openNotification(item,'receive')" ng-if="item.status == 'Published'">
+        <i class="icon"><img ng-src="./img/email.svg" ng-if="item.field == 'messages'"></i>
+        <i class="icon"><img ng-src="./img/horn.svg" ng-if="item.field == 'announcements'"></i>
+        <i class="icon"><img ng-src="./img/pdf-icon.svg" ng-if="item.field == 'newsletters'"></i>
+
+        <b>{{item.subject}}</b>
+        <span style="float: right; font-weight: bold">{{item.messageType}}</span>
+        <p style="font-weight: bold">{{item.text}}</p>
+        <p style="font-weight: bold">{{item.announcementTime | date:'medium'}}</p>
+        <div style="z-index:100000" ng-click="openNotificationOnly(item,'receive');$event.stopPropagation()" ng-if="item.field == 'newsletters'" class="bg-txt-color pull-right">
+          <i class="icon"><img ng-src="./img/info-icon.svg"></i>
+        </div>
+      </a>
+      
+      <a class="item item-icon-left item-icon-right" ng-repeat="item in receiveNotifications | orderBy: '-date'"
+         ng-click="openNotification(item,'receive')" ng-if="item.status == 'Read'">
+        <i class="icon"><img ng-src="./img/email.svg" ng-if="item.field == 'messages'"></i>
+        <i class="icon"><img ng-src="./img/horn.svg" ng-if="item.field == 'announcements'"></i>
+        <i class="icon"><img ng-src="./img/pdf-icon.svg" ng-if="item.field == 'newsletters'"></i>
+        {{item.subject}}
+        <span style="float: right;">{{item.messageType}}</span>
+        <p>{{item.text}}</p>
+        <p>{{item.announcementTime | date:'medium'}}</p>
+        <div style="z-index:100000" ng-click="openNotificationOnly(item,'receive');$event.stopPropagation()" ng-if="item.field == 'newsletters'" class="bg-txt-color pull-right">
+          <i class="icon"><img ng-src="./img/info-icon.svg"></i>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="list" ng-if="sentTabActive">
+      <a class="item item-icon-left item-icon-right"
+         ng-repeat="item in sentNotifications | orderBy: '-announcementTime'"
+         ng-click="openNotification(item,'sent')">
+        <i class="icon"><img ng-src="./img/email.svg" ng-if="item.field == 'messages'"></i>
+        <i class="icon"><img ng-src="./img/horn.svg" ng-if="item.field == 'announcements'"></i>
+        <i class="icon"><img ng-src="./img/pdf-icon.svg" ng-if="item.field == 'newsletters'"></i>
+
+        {{item.subject}}
+        <span style="float: right;">{{item.messageType}}</span>
+        <p>{{item.text}}</p>
+        <h5>{{item.announcementTime | date:'medium'}}</h5>
+        <div style="z-index:100000" ng-click="openNotificationOnly(item,'receive');$event.stopPropagation()" ng-if="item.field == 'newsletters'" class="bg-txt-color pull-right">
+          <i class="icon"><img ng-src="./img/info-icon.svg"></i>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div ng-if="loginResponse.type == 'PARENT'" class="bar-subheader-custm-parentNotification notification-wrap">
+    <div class="list" ng-if="receiveTabActive">
+      <a class="item item-icon-left item-icon-right" ng-repeat="item in receiveNotifications | orderBy: '-date'"
+         ng-click="openNotification(item,'receive')" ng-if="item.status == 'Published'">
+        <i class="icon"><img ng-src="./img/email.svg" ng-if="item.field == 'messages'"></i>
+        <i class="icon"><img ng-src="./img/horn.svg" ng-if="item.field == 'announcements'"></i>
+        <i class="icon"><img ng-src="./img/pdf-icon.svg" ng-if="item.field == 'newsletters'"></i>
+
+        <b>{{item.subject}}</b>
+        <span style="float: right; font-weight: bold">{{item.messageType}}</span>
+        <p style="font-weight: bold">{{item.text}}</p>
+        <p style="font-weight: bold">{{item.announcementTime | date:'medium'}}</p>
+      </a>
+      
+      <a class="item item-icon-left item-icon-right" ng-repeat="item in receiveNotifications | orderBy: '-date'"
+         ng-click="openNotification(item,'receive')" ng-if="item.status == 'Read'">
+        <i class="icon"><img ng-src="./img/email.svg" ng-if="item.field == 'messages'"></i>
+        <i class="icon"><img ng-src="./img/horn.svg" ng-if="item.field == 'announcements'"></i>
+        <i class="icon"><img ng-src="./img/pdf-icon.svg" ng-if="item.field == 'newsletters'"></i>
+
+        {{item.subject}}
+        <span style="float: right;">{{item.messageType}}</span>
+        <p>{{item.text}}</p>
+        <p>{{item.announcementTime | date:'medium'}}</p>
+      </a>
+    </div>
+
+<!--
+    <div class="list" ng-if="sentTabActive">
+      <a class="item item-icon-left item-icon-right"
+         ng-repeat="item in sentNotifications | orderBy: '-announcementTime'"
+         ng-click="openNotification(item,'sent')">
+        <i class="icon"><img ng-src="./img/email.svg" ng-if="item.field == 'messages'"></i>
+        <i class="icon"><img ng-src="./img/horn.svg" ng-if="item.field == 'announcements'"></i>
+        <i class="icon"><img ng-src="./img/pdf-icon.svg" ng-if="item.field == 'newsletters'"></i>
+
+        {{item.subject}}
+        <span style="float: right;">{{item.messageType}}</span>
+        <p>{{item.text}}</p>
+        <h5>{{item.announcementTime | date:'medium'}}</h5>
+
+      </a>
+    </div>
+-->
+  </div>
+</ion-content>

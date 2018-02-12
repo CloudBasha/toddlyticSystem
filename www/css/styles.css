@@ -1,0 +1,211 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "untitled-font-1";
+  src:url("fonts/untitled-font-1.eot");
+  src:url("fonts/untitled-font-1.eot?#iefix") format("embedded-opentype"),
+    url("fonts/untitled-font-1.woff") format("woff"),
+    url("fonts/untitled-font-1.ttf") format("truetype"),
+    url("fonts/untitled-font-1.svg#untitled-font-1") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "untitled-font-1" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "untitled-font-1" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-actions:before {
+  content: "\65";
+}
+.icon-actions1:before {
+  content: "\66";
+}
+.icon-add:before {
+  content: "\67";
+}
+.icon-android:before {
+  content: "\68";
+}
+.icon-calander:before {
+  content: "\69";
+}
+.icon-call:before {
+  content: "\6a";
+}
+.icon-checking:before {
+  content: "\6c";
+}
+.icon-delete:before {
+  content: "\6d";
+}
+.icon-door:before {
+  content: "\6e";
+}
+.icon-edit:before {
+  content: "\6f";
+}
+.icon-others:before {
+  content: "\70";
+}
+.icon-newletter:before {
+  content: "\73";
+}
+.icon-milk:before {
+  content: "\74";
+}
+.icon-message:before {
+  content: "\75";
+}
+.icon-medi:before {
+  content: "\76";
+}
+.icon-meal:before {
+  content: "\77";
+}
+.icon-man:before {
+  content: "\78";
+}
+.icon-information:before {
+  content: "\79";
+}
+.icon-health:before {
+  content: "\7a";
+}
+.icon-flag:before {
+  content: "\41";
+}
+.icon-packages:before {
+  content: "\42";
+}
+.icon-people1:before {
+  content: "\43";
+}
+.icon-photo:before {
+  content: "\44";
+}
+.icon-preview:before {
+  content: "\45";
+}
+.icon-settings:before {
+  content: "\4a";
+}
+.icon-shower:before {
+  content: "\4b";
+}
+.icon-students:before {
+  content: "\4c";
+}
+.icon-school:before {
+  content: "\4d";
+}
+.icon-teachers:before {
+  content: "\4e";
+}
+.icon-announecment:before {
+  content: "\61";
+}
+.icon-chat:before {
+  content: "\62";
+}
+.icon-notifications:before {
+  content: "\6b";
+}
+.icon-notifications-small:before {
+  content: "\63";
+}
+.icon-people:before {
+  content: "\64";
+}
+.icon-recent:before {
+  content: "\72";
+}
+.icon-programs:before {
+  content: "\46";
+}
+.icon-report:before {
+  content: "\47";
+}
+.icon-smiley:before {
+  content: "\48";
+}
+.icon-mood:before {
+  content: "\71";
+}
+.icon-sleep:before {
+  content: "\4f";
+}
+.icon-requests:before {
+  content: "\52";
+}
+.icon-photos:before {
+  content: "\53";
+}
+.icon-cases:before {
+  content: "\54";
+}
+.icon-password:before {
+  content: "\55";
+}
+.icon-approvals:before {
+  content: "\50";
+}
+.icon-tasks:before {
+  content: "\51";
+}
+.icon-billing:before {
+  content: "\56";
+}
+.icon-resend:before {
+  content: "\49";
+}
+.icon-time-table:before {
+  content: "\57";
+}
+.icon-att-report:before {
+  content: "\58";
+}
+.icon-attendance:before {
+  content: "\59";
+}
+.icon-lead:before {
+  content: "\5a";
+}
+.icon-appointments:before {
+  content: "\30";
+}
+.icon-calendar:before {
+  content: "\31";
+}
+.icon-mykids:before {
+  content: "\32";
+}
+.icon-refer:before {
+  content: "\34";
+}
+.icon-school-finder:before {
+  content: "\35";
+}

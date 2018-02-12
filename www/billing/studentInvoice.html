@@ -1,0 +1,87 @@
+<ion-modal-view class="appointment">
+    <ion-header-bar align-title="center">
+      <h1 class="title">Student Invoice</h1>
+    </ion-header-bar>
+    <ion-content class="padding">
+      <div class="scrollContainer">
+        <div class="invoiceTopContainer">
+          <div class="row">
+            <div class="col-33 padding">
+              <span class="invoiceHeader">Invoice No:</span>
+            </div>
+            <div class="col-67 padding">
+              <span class="invoiceLabel">{{studentBill.studentInvoice.prefix}} - {{studentBill.studentInvoice.invoiceNumber}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-33 padding">
+              <span class="invoiceHeader">Date:</span>
+            </div>
+            <div class="col-67 padding">
+              <span class="invoiceLabel">{{studentBill.studentInvoice.createdDate | date : 'LLLL dd, yyyy'}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-33 padding">
+              <span class="invoiceHeader">Due Date:</span>
+            </div>
+            <div class="col-67 padding">
+              <span class="invoiceLabel">{{studentBill.dueDate | date : 'LLLL dd, yyyy'}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-33 padding">
+              <span class="invoiceHeader">Note:</span>
+            </div>
+            <div class="col-67 padding">
+              <span class="invoiceLabel">Tax is {{invoiceTax | number : 2}}%</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-33 padding">
+              <span class="invoiceHeader">Billing Period:</span>
+            </div>
+            <div class="col-67 padding">
+              <span class="invoiceLabel">{{studentBill.billingPeriod}}</span>
+            </div>
+          </div>
+        </div>
+        <table class="table" style="width:100%">
+            <tr style="border: solid 1px grey;">
+                <td class="padding" style="width: 4%;"></td>
+                <td class="padding" style="width: 66%;border: solid 1px grey;">DESCRIPTION</td>
+                <td class="padding" style="width: 30%;border: solid 1px grey;text-align:right;">AMOUNT ({{currency}})</td>
+            </tr>
+
+            <tr ng-repeat="item in studentBill.studentInvoiceItems">
+                <td class="padding" style="width: 4%;border: solid 1px grey;">{{$index + 1}}</td>
+                <td class="padding" style="width: 66%;border: solid 1px grey;">{{item.studentBillingItems.billingItemName}}</td>
+                <td class="padding text-right" style="width: 30%;border: solid 1px grey;">{{item.studentBillingItems.amount  | number : 2}}</td>
+            </tr>
+
+            <tr>
+                <td class="padding" style="width: 4%;"></td>
+                <td class="padding text-right" style="width: 15%;border: solid 1px grey;"><b>SUBTOTAL</b></td>
+                <td class="padding text-right" style="width: 15%;border: solid 1px grey;">{{studentBill.studentInvoice.invoiceAmount | number : 2}}</td>
+            </tr>
+            <tr ng-if="studentBill.studentInvoice.tax > 0">
+                <td class="padding" style="width: 4%;"></td>
+                <td class="padding text-right" style="width: 66%;border: solid 1px grey;"><b>TAX ({{invoiceTax | number : 2}}%)</b></td>
+                <td class="padding text-right" style="width: 15%;border: solid 1px grey;">{{studentBill.studentInvoice.tax | number : 2}}</td>
+            </tr>
+            <tr>
+                <td class="padding" style="width: 4%;"></td>
+                <td class="padding text-right" style="width: 66%;border: solid 1px grey;"><b>TOTAL</b></td>
+                <td class="padding text-right" style="width: 15%;border: solid 1px grey;">{{studentBill.studentInvoice.invoiceTotal | number : 2}}</td>
+            </tr>
+        </table>
+      </div>
+    </ion-content>
+    <ion-footer-bar>
+      <div class="row">
+        <div class="col text-center padding">
+            <button class="button signin-btn button-calm" ng-click="closeModal()">Close</button>
+        </div>
+      </div>
+    </ion-footer-bar>  
+  </ion-modal-view>

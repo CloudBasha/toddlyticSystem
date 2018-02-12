@@ -1,0 +1,13 @@
+<ion-content direction="y" class="has-header kids">
+  <div class="list" ng-if="students.length">
+      <a class="item item-avatar" ui-sref="pApp.kid({kid: student})" ng-repeat="student in students">
+        <img ng-if="student.photoUrl != null" ng-src="{{checkImageUrl(student.photoUrl)}}">
+        <img  ng-if="student.photoUrl == null" ng-src="./img/defaultAvatar.jpg">
+        <h2>{{ student.name }}</h2>
+        <p></p>
+      </a>
+  </div>
+  <div class="col centerPage" ng-if="!students.length">
+      <div style="font-size: 30px;">Click on the <i class="icon ion-person-add"></i> to Add</div>
+  </div>
+</ion-content>

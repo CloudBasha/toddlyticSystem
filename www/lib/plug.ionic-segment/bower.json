@@ -1,0 +1,24 @@
+{
+  "name": "plug.ionic-segment",
+  "version": "0.0.3",
+  "homepage": "https://github.com/frontexpert/plug.ionic-segment",
+  "authors": [
+    "FrontExpert <frontexport1987@gmail.com>"
+  ],
+  "description": "Ionic iOS segment plugin module.",
+  "main": "dist/plug.ionic-segment.js",
+  "keywords": [
+    "ionic",
+    "ios",
+    "segment"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "LICENCE"
+  ]
+}

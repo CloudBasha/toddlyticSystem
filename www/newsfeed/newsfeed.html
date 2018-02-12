@@ -1,0 +1,210 @@
+<ion-content style="margin-bottom: 15px;" class="bar-subheader-custm-newsfeed newsfeed-wrap">
+  <!--<div class="item item-input" ng-if="showFilter">-->
+  <!--<input type="search" placeholder="Search here..." ng-model="search.text" ng-change="scrollTop()"-->
+  <!--class="padding-horizontal ng-valid ng-dirty ng-valid-parse ng-empty ng-touched" style="">-->
+  <!--</div>-->
+  <ion-refresher pulling-icon="ion-refresh positive" refreshing-icon="ion-loading-b positive"
+                 on-refresh="doRefresh()"></ion-refresher>
+  <div class="list padding-horizontal" ng-repeat="news in displayNewsFeed  | orderBy: '-auditLog.created_datetime'">
+
+    <!--Begin of Photos Feed-->
+    <div ng-if="news.photo != null">
+      <div class="item item-avatar">
+        <img ng-src="./img/defaultAvatar.jpg" ng-if="news.auditLog.userId.contact.photoUrl == null">
+        <img ng-src="{{checkImageUrl(news.auditLog.userId.contact.photoUrl)}}"
+             ng-if="news.auditLog.userId.contact.photoUrl != null">
+        <p class="link item-text-wrap"><span
+          ng-click="openPersonInfo(news.auditLog.userId.contact.type,news.auditLog.userId.contact)">{{news.auditLog.userId.contact.name}}</span>
+                    <span style="color: #666;white-space: normal;" ng-if="news.auditLog.action !== 'insert'">{{"  " +  news.auditLog.action}}ed a Photo
+                    </span>
+                    <span style="color: #666;white-space: normal;" ng-if="news.auditLog.action === 'insert'">uploaded a photo
+                    </span>
+        </p>
+        <time>{{ news.auditLog.formattedDateTime | amCalendar }}</time>
+      </div>
+      <div class="item item-body">
+        <h4 style="font-size: 16px !important;">{{news.photo.imageDescription}}</h4>
+        <img class="full-image" ng-src="{{checkImageUrl(news.photo.imageUrl)}}"
+             ng-if="news.photo.imageUrl != null" ng-click="showImage(news.photo.imageUrl)">
+      </div>
+    </div>
+    <!--End of Photos Feed-->
+
+    <!--Begin of Tagged Photo Feeds-->
+    <div ng-if="news.photoTagging != null && (loginResponse.type === 'ADMIN' ||  loginResponse.type === 'TEACHER' ||  loginResponse.type === 'STAFF')">
+      <div class="item item-avatar">
+        <img ng-src="./img/defaultAvatar.jpg" ng-if="news.auditLog.userId.contact.photoUrl == null">
+        <img ng-src="{{checkImageUrl(news.auditLog.userId.contact.photoUrl)}}"
+             ng-if="news.auditLog.userId.contact.photoUrl != null">
+        <p class="link item-text-wrap">
+          <span ng-click="openPersonInfo(news.auditLog.userId.contact.type,news.auditLog.userId.contact)">
+            {{news.auditLog.userId.contact.name}}
+          </span>
+          <span style="color: #666;white-space: normal;" ng-if="_.size(news.studentInfo) == 1">tagged {{news.studentInfo[Utils.keys(news.studentInfo)]}} to a photo.</span>
+          <span style="color: #666;white-space: normal;" ng-if="_.size(news.studentInfo) == 2">tagged {{news.studentInfo[Utils.keys(news.studentInfo)[0]]}} and {{_.size(news.studentInfo)-1}} other to a photo.</span>
+          <span style="color: #666;white-space: normal;" ng-if="_.size(news.studentInfo) > 2">tagged {{news.studentInfo[Utils.keys(news.studentInfo)[0]]}} and {{_.size(news.studentInfo)-1}} others to a photo.</span>
+
+        </p>
+        <time>{{ news.auditLog.formattedDateTime | amCalendar }}</time>
+      </div>
+      <div class="item item-body">
+        <h4 style="font-size: 16px !important;">{{news.photoTagging.photo.imageDescription}}</h4>
+        <img class="full-image" ng-src="{{checkImageUrl(news.photoTagging.photo.imageUrl)}}"
+             ng-if="news.photoTagging.photo.imageUrl != null" ng-click="showImage(news.photoTagging.photo.imageUrl)">
+      </div>
+    </div>
+
+    <div ng-if="news.photoTagging != null && (loginResponse.type === 'PARENT')">
+      <div class="item item-avatar">
+        <img ng-src="./img/defaultAvatar.jpg" ng-if="news.auditLog.userId.contact.photoUrl == null">
+        <img ng-src="{{checkImageUrl(news.auditLog.userId.contact.photoUrl)}}"
+             ng-if="news.auditLog.userId.contact.photoUrl != null">
+
+        <p class="link item-text-wrap">
+          <span ng-click="openPersonInfo(news.auditLog.userId.contact.type,news.auditLog.userId.contact)">
+            {{news.auditLog.userId.contact.name}}
+          </span>
+          <span style="color: #666;white-space: normal;">tagged your child to a photo.</span>
+        <!--
+                  <span style="color: #666;white-space: normal;" ng-if="_.size(news.studentInfo) == 2">tagged {{news.studentInfo[Utils.keys(news.studentInfo)[0]]}} and {{_.size(news.studentInfo)-1}} other to a photo.</span>
+                  <span style="color: #666;white-space: normal;" ng-if="_.size(news.studentInfo) > 2">tagged {{news.studentInfo[Utils.keys(news.studentInfo)[0]]}} and {{_.size(news.studentInfo)-1}} others to a photo.</span>
+        -->
+        </p>
+        <time>{{ news.auditLog.formattedDateTime | amCalendar }}</time>
+      </div>
+      <div class="item item-body">
+        <h4 style="font-size: 16px !important;">{{news.photoTagging.photo.imageDescription}}</h4>
+        <img class="full-image" ng-src="{{checkImageUrl(news.photoTagging.photo.imageUrl)}}"
+             ng-if="news.photoTagging.photo.imageUrl != null" ng-click="showImage(news.photoTagging.photo.imageUrl)">
+      </div>
+    </div>
+    <!--End of Photos Feed-->
+
+    <!--Begin of Tracking Feed-->
+    <div ng-if="news.tracking != null">
+      <div class="item item-avatar">
+        <img ng-src="./img/defaultAvatar.jpg" ng-if="news.auditLog.userId.contact.photoUrl == null">
+        <img ng-src="{{checkImageUrl(news.auditLog.userId.contact.photoUrl)}}"
+             ng-if="news.auditLog.userId.contact.photoUrl != null">
+        <button style="position: absolute; bottom: 5px; right: 10px;" ng-click="$event.stopPropagation();showTrackingModal(news)" class="button button-icon ion-edit" ng-if="userType === 'Admin' || (news.auditLog.created_by === userEmail && userType === 'Teacher')"></button>
+        <p class="link item-text-wrap"><span
+          ng-click="openPersonInfo(news.auditLog.userId.contact.type,news.auditLog.userId.contact)">{{news.auditLog.userId.contact.name}}</span>
+        </p>
+
+
+
+                    <span ng-if="news.tracking.typeName == 'healthCheck' && news.tracking.remark != 'healthy'">
+                        <span>completed Health Check for <span class="link item-text-wrap"
+                                                               ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span></span>
+                        <span ng-if="news.tracking.temperature > 36.7"><br/><span class="link item-text-wrap"
+                                                                                  ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span>'s temperature is {{news.tracking.temperature}}!</span>
+                        <span ng-if="news.tracking.cough != false"><br/><span class="link item-text-wrap"
+                                                                              ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span> has a cough.</span>
+                        <span ng-if="news.tracking.blister != ''"><br/><span class="link item-text-wrap"
+                                                                             ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span> has a blister eruption in {{news.tracking.blister}}.</span>
+                        <span ng-if="news.tracking.rashes != false"><br/><span class="link item-text-wrap"
+                                                                               ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span> has a rash.</span>
+                        <span ng-if="news.tracking.mouthulcer != false"><br/><span class="link item-text-wrap"
+                                                                                   ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span> has a mouth ulcer.</span>
+                        <span ng-if="news.tracking.droolingsaliva != false"><br/><span class="link item-text-wrap"
+                                                                                       ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span> is drooling saliva.</span>
+                        <span ng-if="news.tracking.redwateryeyes != false"><br/><span class="link item-text-wrap"
+                                                                                      ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span> has red watery eyes.</span>
+                        <span ng-if="news.tracking.runnynose != false"><br/><span class="link item-text-wrap"
+                                                                                  ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span> has a runny nose.</span>
+                        <span ng-if="news.tracking.virus != false"><br/><span class="link item-text-wrap"
+                                                                              ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span> has a virus infection.</span>
+                        <span ng-if="news.tracking.remark != ''"><br/><span class="link item-text-wrap"
+                                                                            ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span> has {{news.tracking.remark}}.</span>
+                    </span>
+                    <span ng-if="news.tracking.typeName == 'healthCheck' && news.tracking.remark == 'healthy'">
+                        <span> completed Health Check for
+                          <span class="link item-text-wrap"
+                                ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span>
+                        </span>
+                        <span><br/>
+                          <span class="link item-text-wrap"
+                                ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span>
+                          is healthy.</span>
+                    </span>
+
+                    <span ng-if="news.tracking.typeName != 'healthCheck'">
+                        <span
+                          ng-if="news.tracking.typeName == 'bath'"><span class="link item-text-wrap"
+                                                                         ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span> had a bath!</span>
+                        <span ng-if="news.tracking.typeName == 'potty1'"><span class="link item-text-wrap"
+                                                                               ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span> had a small potty!</span>
+                        <span ng-if="news.tracking.typeName == 'potty2'"><span class="link item-text-wrap"
+                                                                               ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span> had a big potty!</span>
+                        <span ng-if="news.tracking.typeName == 'bottleFeeding'"><span class="link item-text-wrap"
+                                                                                      ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span> had {{news.tracking.quantity}} {{news.tracking.unit}} of milk!</span>
+                        <span ng-if="news.tracking.typeName == 'meal'"><span class="link item-text-wrap"
+                                                                             ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span> had {{news.tracking.meal.mealName}} for {{news.tracking.menu.menuName}}!</span>
+                        <span ng-if="news.tracking.typeName == 'medication'">gave medication to <span
+                          class="link item-text-wrap"
+                          ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span>. {{news.tracking.remark}}</span>
+                        <span
+                          ng-if="(news.tracking.typeName == 'sleepoMeter' || news.tracking.typeName == 'sleep') && (news.tracking.value == 'Start')"
+                        ><span class="link item-text-wrap"
+                               ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span> went to sleep.</span>
+                        <span
+                          ng-if="(news.tracking.typeName == 'sleepoMeter' || news.tracking.typeName == 'sleep') && (news.tracking.value == 'End')"
+                        ><span class="link item-text-wrap"
+                               ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span> woke up from sleep.</span>
+                        <span
+                          ng-if="news.tracking.typeName == 'checkIn'">checked in <span class="link item-text-wrap"
+                                                                                       ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span>.</span>
+                        <span ng-if="news.tracking.typeName == 'checkOut'">checked out <span
+                          class="link item-text-wrap"
+                          ng-click="openPersonInfo('Student',news.tracking.student)">{{news.tracking.student.name}}</span>.</span>
+                    </span>
+
+        <div>
+          <time>{{ news.auditLog.formattedDateTime | amCalendar }}</time>
+        </div>
+      </div>
+    </div>
+    <!--End of Tracking Feed-->
+  </div>
+  <ion-infinite-scroll
+    ng-if="displayNewsFeed.length % 50 == 0"
+    on-infinite="loadMore()">
+  </ion-infinite-scroll>
+</ion-content>
+<div ng-if="loginResponse.type === 'ADMIN' || loginResponse.type === 'TEACHER'" class="material-button">
+  <a type="button" ng-click="openPopover($event)">
+    <img style="height: 50px;" ng-src="./img/addicon.svg">
+  </a>
+</div>
+
+<script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <!--<ion-header-bar>
+      <h1 class="title">My Popover Title</h1>
+    </ion-header-bar>-->
+    <ion-content class="popover-wrap">
+      <div class="list">
+        <a class="item item-icon-left" ng-click="openQuickLinkPage('app.addNewAction')">
+          <i class="icon"><img ng-src="./img/actions.svg"></i>
+          Add action
+        </a>
+        <a class="item item-icon-left" ng-click="show()">
+          <i class="icon"><img ng-src="./img/photos.svg"></i>
+          Add photo
+        </a>
+        <a class="item item-icon-left" ng-click="openQuickLinkPage('app.composer')">
+          <i class="icon"><img ng-src="./img/send_message.svg"></i>
+          Send message
+        </a>
+      </div>
+    </ion-content>
+  </ion-popover-view>
+</script>
+
+<script id="image-modal.html" type="text/ng-template">
+  <div class="modal image-modal transparent" ng-click="closeModal()">
+    <ion-pane class="transparent">
+      <img ng-src="{{checkImageUrl(imageSrc)}}" class="fullscreen-image"/>
+    </ion-pane>
+  </div>
+</script>

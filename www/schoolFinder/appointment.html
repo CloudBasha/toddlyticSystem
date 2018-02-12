@@ -1,0 +1,69 @@
+<ion-modal-view class="appointment">
+    <ion-header-bar align-title="center" style="background-color: #11c1f3;">
+      <h1 class="title" style="color:white">Make An Appointment</h1>
+    </ion-header-bar>
+    <form name="appointmentForm" novalidate>
+      <ion-content class="apointmentContent">
+          <div class="list">
+            <label class="item item-input item-stacked-label padding-right">
+              <span class="input-label">Preferred Date</span>
+              <input type="text" name="p_date" ng-model="appointment.preferredDate" placeholder="Preferred Date" ng-click="openDatePicker(appointmentDatePickerOptions)" readonly="" required>
+              <div ng-messages="appointmentForm.p_date.$error" class="col-sm-12 help-block" role="alert">
+                <div ng-message="required">Required field*</div>
+              </div>
+            </label>
+            <label class="item item-input item-stacked-label padding-right">
+              <span class="input-label">Preferred Time</span>
+              <input type="text" name="p_time" ng-model="appointment.preferredTime" placeholder="Preferred Time" ng-click="openTimePicker()" readonly="" required>
+              <div ng-messages="appointmentForm.p_time.$error" class="col-sm-12 help-block" role="alert">
+                <div ng-message="required">Required field*</div>
+              </div>
+            </label>
+            <label class="item item-input item-select">
+                <span class="input-label">Child</span>
+                <select ng-model="appointmentChild" ng-change="setChildInfo(appointmentChild, appointmentForm)" name="child" required>
+                  <option value="{{student}}" ng-repeat="student in freeStudents">{{student.name}}</option>
+                  <option value="Add Child">Add Child</option>
+                </select>
+            </label>
+            <div style="height: auto;" ng-messages="appointmentForm.child.$error" class="col-sm-12 help-block padding" role="alert">
+                <div ng-message="required">Required field*</div>
+            </div>
+            <label ng-show="showNewChildInfo" class="item item-input item-stacked-label padding-right">
+              <span class="input-label">Child Name</span>
+              <input type="text" name="childName" ng-model="appointment.childName" placeholder="Child Name" required>
+              <div ng-messages="appointmentForm.childName.$error" class="col-sm-12 help-block" role="alert">
+                <div ng-message="required">Required field*</div>
+              </div>
+            </label>
+            <label ng-show="showNewChildInfo" class="item item-input item-select">
+                <span class="input-label">Gender</span>
+                <select ng-model="appointment.childGender" name="childGender" required>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+            </label>
+            <div ng-show="showNewChildInfo" style="height: auto;" ng-messages="appointmentForm.childGender.$error" class="col-sm-12 help-block padding" role="alert">
+              <div ng-message="required">Required field*</div>
+            </div>
+            <label ng-show="showNewChildInfo" class="item item-input item-stacked-label padding-right">
+              <span class="input-label">Date of Birth</span>
+              <input type="text" name="childDob" ng-model="appointment.childDob" placeholder="Date of Birth" ng-click="openDatePicker(childDatePickerOptions)" readonly="" required>
+              <div ng-messages="appointmentForm.childDob.$error" class="col-sm-12 help-block" role="alert">
+                <div ng-message="required">Required field*</div>
+              </div>
+            </label>
+          </div>
+      </ion-content>
+      <ion-footer-bar>
+        <div class="row">
+            <div class="col text-center">
+                <button class="button signin-btn button-calm" ng-click="closeModal()">Close</button>
+            </div>
+            <div class="col text-center">
+              <button class="button signin-btn button-calm" ng-click="makeAppointment(appointmentForm.$valid)">Submit</button>
+            </div>
+        </div>
+      </ion-footer-bar>
+    </form>
+  </ion-modal-view>

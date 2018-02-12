@@ -1,0 +1,26 @@
+<ion-content class="bar-subheader-custm" scroll="false">
+  <div style="height: 50%">
+      <onezone-datepicker id="datePickerDiv" datepicker-object="onezoneDatepicker"></onezone-datepicker>
+  </div>
+  <div class="eventContainer">
+      <ion-scroll zooming="true" direction="y" style="width: 100%; height: 100%">
+          <div class="list">
+              <div ng-repeat="event in events" ng-click="showDetails(event)">
+                <div class="row">
+                    <div class="col-25 timeItem">
+                        <span>{{event.startTime}}</span>
+                    </div>
+                    <div class="col-75 timeItem2">
+                        <div class="wrapWord">
+                            {{event.eventTitle}}
+                        </div>
+                        <div ng-if="publicCalendar || stateParams" class="wrapWord">
+                            {{event.eventDesc}}
+                        </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+      </ion-scroll>
+  </div>
+</ion-content>

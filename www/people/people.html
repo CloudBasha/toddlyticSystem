@@ -1,0 +1,139 @@
+<ion-content class="bar-subheader-custm peopleContent" scroll="false">
+  <ion-segment ng-model="segmentType" full="false" class="segmentBar">
+    <ion-segment-button class="segmentButton" value="students">
+      Students
+    </ion-segment-button>
+    <ion-segment-button class="segmentButton" value="users">
+      Users
+    </ion-segment-button>
+    <ion-segment-button ng-if="loginResponse.type == 'ADMIN'" class="segmentButton" value="Non-Users">
+      Non-Users
+    </ion-segment-button>
+    <ion-segment-button ng-if="loginResponse.type == 'ADMIN'" class="segmentButton" value="Parent">
+      Parents
+    </ion-segment-button>
+  </ion-segment>
+  <ion-scroll zooming="true" direction="y" style="width: 100%; height: 92%">
+    <div ng-switch="segmentType">
+      <ion-list ng-switch-when="students">
+        <ion-item class="item item-input item-select">
+            <div class="input-label">
+              Program
+            </div>
+            <select multiple="true" ng-change="filterStudentsByProgram(selected.programs)" class="filterSelect" ng-model="selected.programs" ng-options="program.programSchoolId as program.programSchoolName group by program.school.schoolName for program in orderedProgramsList">
+            </select>
+        </ion-item>
+        <ion-item style="padding-bottom: 0px;" class="item item-avatar" ng-repeat="studentItem in studentsList | orderBy:'student.name' | filter: programFilter" ng-click="heldItems.length ? holdItem(studentItem) : openPersonInfo('student', studentItem.student)" on-hold="holdItem(studentItem)" ng-class="{'gray-bg': heldItems.indexOf(studentItem) > -1}">
+          <img ng-src="./img/defaultAvatar.jpg" ng-if="studentItem.student.photoUrl == null">
+          <img ng-src="{{checkImageUrl(studentItem.student.photoUrl)}}"
+               ng-if="studentItem.student.photoUrl != null">
+          {{studentItem.student.name}}
+          <div class="row studentIconRow">
+            <div class="col">
+              <i class="icon ion-android-checkmark-circle" style="font-size : 25px;position: relative;top: 5px;color:red" ng-if="studentItem.student.isCheckIn== 'false' && studentItem.student.isCheckIn"></i>
+              <i class="icon ion-android-checkmark-circle success" style="font-size : 25px;position: relative;top: 5px;" ng-if="studentItem.student.isCheckIn == 'true' && studentItem.student.isCheckIn"></i>
+            </div>
+<!--
+            <div class="col" style="position: relative;top: 10px;" ng-if="studentItem.student.isSleep == 'false' && studentItem.student.isSleep">
+              <img src="./img/sleepometer.svg" ><span class="checkInText"  style="color: #38966A;padding-left:5px;">Awake</span>
+            </div>
+-->
+            <div class="col" style="position: relative;top: 10px;">
+              <img style="width: 25px;" ng-if="studentItem.student.isSleep == 'true' && studentItem.student.isSleep" src="./img/sleepometer.svg">
+<!--              <span ng-if="studentItem.student.isSleep == 'true' && studentItem.student.isSleep" class="checkInText" style="color: #13A0DB;padding-left:5px;">Asleep</span>-->
+            </div>
+            <div class="col">
+              <img style="width: 20px;position: relative;top: 5px;" ng-if="studentItem.student.isHealthy == 'false' && studentItem.student.isHealthy" src="./img/healthcheckRed.svg" >
+<!--              <span ng-if="studentItem.student.isHealthy == 'false' && studentItem.student.isHealthy" class="checkInText" style="color: red;padding-left:5px;bottom: 6px;">Sick</span>-->
+            </div>
+<!--
+            <div class="col"  ng-if="studentItem.student.isHealthy == 'true' && studentItem.student.isHealthy">
+              <img src="./img/healthcheck.svg"><span class="checkInText" style="color: #38966A;padding-left:5px;">Healthy</span>
+            </div>
+-->
+          </div>
+        </ion-item>
+      </ion-list>
+
+      <ion-list ng-switch-when="users">
+        <div class="item item-divider" ng-if="groupedContacts.Admin.length">
+          Admin
+        </div>
+        <ion-item class="item item-avatar" ng-repeat="contactItem in groupedContacts.Admin | orderBy:'-name'"
+               ng-click="openPersonInfo('Admin',contactItem)">
+          <img ng-src="./img/defaultAvatar.jpg" ng-if="contactItem.photoUrl == null">
+          <img ng-src="{{checkImageUrl(contactItem.photoUrl)}}" ng-if="contactItem.photoUrl != null">
+          {{contactItem.name}}
+        </ion-item>
+        <div class="item item-divider" ng-if="groupedContacts.Teacher.length">
+          Teacher
+        </div>
+        <ion-item class="item item-avatar" ng-repeat="contactItem in groupedContacts.Teacher| orderBy:'-name'"
+               ng-click="openPersonInfo('Teachers',contactItem)">
+          <img ng-src="./img/defaultAvatar.jpg" ng-if="contactItem.photoUrl == null">
+          <img ng-src="{{checkImageUrl(contactItem.photoUrl)}}" ng-if="contactItem.photoUrl != null">
+          {{contactItem.name}}
+        </ion-item>
+        <div ng-if="groupedContacts.User.length" class="item item-divider">
+          Staff
+        </div>
+        <ion-item class="item item-avatar" ng-repeat="contactItem in groupedContacts.User | orderBy:'-name'"
+               ng-click="openPersonInfo('Users',contactItem)">
+          <img ng-src="./img/defaultAvatar.jpg" ng-if="contactItem.photoUrl == null">
+          <img ng-src="{{checkImageUrl(contactItem.photoUrl)}}" ng-if="contactItem.photoUrl != null">
+          {{contactItem.name}}
+        </ion-item>
+      </ion-list>
+      <ion-list ng-switch-when="Non-Users">
+        <ion-item class="item item-avatar" ng-repeat="contactItem in groupedContacts['Non-Staff'] | orderBy:'-name'"
+               ng-click="openPersonInfo('Non-Staff',contactItem)">
+          <img ng-src="./img/defaultAvatar.jpg" ng-if="contactItem.photoUrl == null">
+          <img ng-src="{{checkImageUrl(contactItem.photoUrl)}}" ng-if="contactItem.photoUrl != null">
+          {{contactItem.name}}
+        </ion-item>
+      </ion-list>
+      <ion-list ng-switch-when="Parent">
+        <ion-item class="item item-avatar" ng-repeat="contactItem in groupedContacts.Parent | orderBy:'-name'"
+               ng-click="openPersonInfo('Parent',contactItem)">
+          <img ng-src="./img/defaultAvatar.jpg" ng-if="contactItem.photoUrl == null">
+          <img ng-src="{{checkImageUrl(contactItem.photoUrl)}}" ng-if="contactItem.photoUrl != null">
+          {{contactItem.name}}
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-scroll>
+
+
+    <!--  <ion-list ng-switch-when="non-users">
+        <ion-item>
+          Game of Thrones
+        </ion-item>
+      </ion-list>
+
+      <ion-list ng-switch-when="parents">
+        <ion-item>
+          Ice Age
+        </ion-item>
+      </ion-list> -->
+
+
+  <!-- <div class="list people-wrap link">
+    <div class="item item-divider" ng-if="studentsList != ''">Student</div>
+    <a class="item item-avatar" ng-repeat="studentItem in studentsList | orderBy:'student.name'"
+       ng-click="openPersonInfo('student',studentItem.student)" on-hold="holdItem(studentItem)" ng-class="{'gray-bg': heldItems.indexOf(studentItem) > -1}">
+      <img ng-src="./img/defaultAvatar.jpg" ng-if="studentItem.student.photoUrl == null">
+      <img ng-src="{{checkImageUrl(studentItem.student.photoUrl)}}"
+           ng-if="studentItem.student.photoUrl != null">
+      {{studentItem.student.name}}
+    </a>
+    <a ng-repeat="(type, contactItems) in contactsList | groupBy: 'type'" ng-if="(currentUser.type === 'TEACHER' && (type !== 'Non-Staff' && type !== 'Parent'))">
+      <div class="item item-divider">{{type}}</div>
+      <div class="item item-avatar" ng-repeat="contactItem in contactItems | orderBy:'-name'"
+           ng-click="openPersonInfo(type,contactItem)">
+        <img ng-src="./img/defaultAvatar.jpg" ng-if="contactItem.photoUrl == null">
+        <img ng-src="{{checkImageUrl(contactItem.photoUrl)}}" ng-if="contactItem.photoUrl != null">
+        {{contactItem.name}}
+      </div>
+    </a>
+  </div> -->
+</ion-content>

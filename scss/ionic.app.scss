@@ -1,0 +1,926 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+@import "www/lib/ionic-social-buttons/ionic-social-buttons.scss";
+
+.pb-20{
+  padding-bottom: 20px!important;
+}
+
+.pl-20{
+  padding-left: 20px!important;
+}
+
+.pr-20{
+  padding-right: 20px!important;
+}
+
+.pt-20{
+  padding-top: 20px!important;
+}
+
+.pb-10{
+  padding-bottom: 10px!important;
+}
+
+.pl-10{
+  padding-left: 10px!important;
+}
+
+.pr-10{
+  padding-right: 10px!important;
+}
+
+.pt-10{
+  padding-top: 10px!important;
+}
+
+.has-header {
+    top: 66px !important;
+}
+
+.has-header2 {
+    top: 36px!important;
+}
+
+.bulkTrackingModalIcon{
+  line-height: 6vh!important;
+  font-size: 30px!important;
+  margin-left: 2%!important;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.popup-buttons {
+  .button {
+    small {
+      font-size: 80%;
+    }
+  }
+}
+
+.toddlyticModalBar{
+    border-color: #13A0DB !important;
+    background-color: #13A0DB !important;
+    background-image: linear-gradient(0deg, #0a9dc7, #0a9dc7 50%, transparent 50%);
+    color: #fff;
+}
+
+.closeButton {
+  border-color: #13A0DB;
+  background-color: #13A0DB;
+  color: #fff;
+}
+
+.gray-bg {
+  background-color: #D9D9D9;
+}
+
+input {
+    border-bottom: 1px solid $light !important;
+}
+
+.inputLineDark{
+  border-bottom: 1px solid $dark!important;
+}
+
+.tz-picker {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid $light !important;
+}
+
+.social-login {
+    h3 {
+        font-weight: bold;
+        margin-top: 120px;
+        text-transform: uppercase;
+    }
+
+    .button {
+        text-transform: uppercase;
+
+
+        &:first-of-type {
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.social-button-facebook,
+.social-button-google {
+
+    &::before  {
+        font-size: 25px !important;
+        padding: 2px 12px !important;
+    }
+}
+
+.kid,
+.profile,
+.addressEditModalContent,
+.appointment,
+.inviteSchool {
+    input,
+    textarea {
+        border-bottom: 1px solid $dark !important;
+    }
+}
+
+ul#ion-segment {
+    padding: 0;
+
+    li {
+        border: 0;
+        line-height: 44px;
+        max-height: 54px;
+        min-height: 44px;
+
+        &.active {
+          span {
+              text-decoration: underline;
+          }
+        }
+    }
+}
+
+.button-delete {
+  position: absolute;
+  top: 10px;
+  right: 1px;
+  background-color: transparent;
+  color: #fff!important;
+  z-index: 20;
+
+  &::before {
+    font-size: 35px !important;
+  }
+}
+
+.segmentButton{
+  font-size: 15px;
+}
+
+.segmentBar{
+  background-color: #00293a;
+}
+
+.button-download {
+  position: absolute;
+  top: 10px;
+  right: 35px;
+  background-color: transparent;
+  color: #fff!important;
+  z-index: 20;
+
+  &::before {
+    font-size: 35px !important;
+  }
+}
+
+.photos{
+  .info{
+    font-size: 20px!important;
+  }
+}
+
+.profile,
+.kid {
+    .item-input {
+        padding: 6px 16px 5px;
+    }
+}
+
+.signup {
+    .item input {
+        color: $light;
+    }
+
+    .button {
+        text-transform: uppercase;
+    }
+
+    .item {
+        .error {
+            color: $light;
+            font-size: 90%;
+            margin-top: 8px;
+        }
+    }
+
+    .input-label {
+        max-width: 100%;
+        text-align: left;
+        width: 100%;
+    }
+
+    .custom-width {
+        float: left;
+        min-width: 85%;
+    }
+  
+    .bar-footer {
+      height: 60px;
+    }
+
+}
+
+.schoolRegister{
+  .bar-footer {
+    height: 60px;
+  }
+}
+
+//.schoolRegistration{
+//  .custom-width {
+//      float: left;
+//      min-width: 85%;
+//  }
+//
+//  .mobileInputCustom{
+//      padding: 3px 0px 5px 30px !important;
+//  }
+//
+//  .input-custm{
+//    color : white;
+//  }
+//}
+
+.appointments {
+    .button[disabled] {
+        opacity: 1;
+    }
+
+  .item h3{
+    font-size: 18px;
+  }
+
+  .item h4{
+    font-size: 14px;
+  }
+
+  .list{
+    margin-bottom: 60px;
+  }
+}
+
+.wordWrap{
+  white-space: normal!important;
+}
+
+.getting-started {
+
+    .student-list {
+        span {
+            display: inline-block;
+            width: 50%;
+        }
+      height: 87vw;
+      overflow: scroll;
+    }
+  
+  .summary-student-list{
+    height: 54vw;
+    overflow: scroll;
+  }
+
+    .input-label-error {
+        color: $assertive;
+        font-size: 90%
+    }
+
+    .slider {
+        margin-top: 66px;
+        overflow-y: scroll;
+    }
+
+    .slider-slide {
+    }
+
+    .item {
+        border: 0;
+    }
+
+    .item-divider,
+    input[disabled] {
+        background-color: $light;
+    }
+  
+  .fullSelectWidth{
+    max-width: 100%;
+  }
+  
+  .submitButtons{
+    position: absolute;
+    bottom: 17vw;
+    z-index: 100;
+  }
+}
+
+.schoolListContainer{
+  
+  .item{
+    border: none;  
+  }
+  
+  .fullSelectWidth{
+    max-width: 100%;
+  }
+  
+  .input-label {
+    display: table;
+    padding: 7px 10px 7px 0;
+    max-width: 200px;
+    width: 10%;
+  }
+  
+  .item-input {
+    padding: 10px 0 10px 0;
+  }
+  
+  .item-select select {  
+    padding: 0 38px 0 6px;
+  }
+}
+
+.selectMinHeight{
+  min-height: 20px;
+}
+
+.no-padding {
+    padding: 0px !important;
+}
+
+.kids-menu {
+
+    &.popover {
+        border-radius: 0 !important;
+        height: 90vh !important;
+        width : 150px;
+
+        .list {
+            .item {
+                border-radius: 0 !important;
+                padding: 16px;
+            }
+        }
+
+        .item-avatar {
+
+            &.selectedStudentHighlight {
+              img:first-child {
+                height: 90px;
+                max-height: 90px;
+                max-width: 90px;
+                width: 90px;
+              }
+            }
+
+            img {
+                &:first-child {
+                    display: block;
+                    left: 0;
+                    margin: 0 auto 10px;
+                    height: 50px;
+                    max-height: 50px;
+                    max-width: 50px;
+                    position: relative;
+                    top: 0;
+                    width: 50px;
+                }
+            }
+        }
+    }
+
+    .bar .title {
+        color: $dark !important;
+    }
+
+    .scroll-content {
+        height: auto !important;
+    }
+}
+
+.sort-places{
+  &.popover {
+    width: 50%;
+    height: 141px !important;
+  }
+
+  .sortPlaceScroll{
+    top: 20px!important;
+  }
+}
+
+.inviteSchool{
+  form{
+    margin-bottom: 10vh;
+  }
+
+  .bar-footer .row {
+    background-color: #fff!important;
+  }
+
+  .bar-footer {
+      height: 57px;
+  }
+}
+
+.kidsMenuScroll{
+  top: 40px !important;
+  height: auto;
+}
+
+.platform-android .bar .title {
+  font-size: 20px!important;
+  font-weight: 500!important;
+}
+
+.actionSheetContactSchool{
+  font-size: 22px;
+}
+
+.parent-landing {
+    margin-top: 66px;
+    .col-50 {
+        margin-bottom: 10px;
+    }
+
+    .row-wrap{
+        padding-top: 12vh
+    }
+
+    img {
+        display: block;
+        height: 75px;
+        margin: 0 auto 10px;
+        width: 75px;
+    }
+}
+
+.titleHeader{
+  white-space: pre-wrap!important;
+}
+
+.invoiceTopContainer{
+  margin-bottom: 50px;
+}
+
+.scrollContainer{
+//  max-height: 485px;
+  overflow-y: scroll;
+  padding-bottom: 20px;
+}
+
+.homeIcons{
+  font-size: 70px;
+  color: #13A0DB;
+}
+
+.homeIconLabel{
+  color : #8e8e8e;
+}
+
+.billing {
+    .billingRow {
+        min-height: 120px;
+    }
+
+    .invoiceHeader{
+        font-size: 20px;
+    }
+
+    .invoiceHeaderBold{
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .invoiceLabel{
+        font-size: 18px;
+    }
+
+    .billingItem{
+        padding: 5px;
+        border: none;
+
+        a {
+          text-decoration: underline;
+        }
+    }
+
+    .billingItem div{white-space: normal;}
+
+    h1 {
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+
+    + .bar.bar-light .title {
+        color: $dark;
+    }
+
+}
+
+.profile {
+    height: auto;
+
+    .avatar {
+        border-radius: 50%;
+        margin: 0 auto;
+        min-height: 120px;
+        min-width: 120px;
+        max-height: 120px;
+        max-width: 120px;
+    }
+
+    .item {
+        border: 0;
+    }
+
+    .textarealabel.activated{
+      background-color: white!important;
+    }
+
+    .textArea{
+      resize: none;
+      background: none!important;
+    }
+
+    .item-select{
+      border-bottom: 1px solid #444!important;
+      margin: 0 15px 0 15px;
+      padding: 11px 0px 10px 0px;
+    }
+}
+
+.filterSelect{
+  right: -4vw!important;
+  direction: ltr!important;
+}
+
+.eventDetails {
+    height: auto;
+  
+    .item {
+        border: 0;
+    }
+
+    .textarealabel.activated{
+      background-color: white!important;
+    }
+
+    .textArea{
+      resize: none;
+      background: none!important;
+    }
+  
+    .eventDetails input, .eventDetails textarea {
+        border-bottom: 1px solid #444!important;
+    }
+}
+
+.login-form {
+    .input-label {
+        max-width: 100%;
+        text-align: left;
+        width: 100%;
+    }
+}
+
+.studentIconRow{
+  padding-top: 0;
+  height: 25px;
+}
+
+.checkInText{
+    font-size: 15px;
+    position: relative;
+    bottom: 4px;
+}
+
+.kids {
+    height: auto;
+}
+
+.storesMapContainer{
+  position: relative;
+  right: 0;
+  width: 100%;
+  height: 40vh;
+}
+
+.bar-subheader-custm{
+    top: 66px !important;
+    height: auto;
+}
+
+.schoolFinderWrap{
+    top: 66px !important;
+    height: 100%;
+}
+
+.schoolSpecificContainer{
+  margin-bottom: 66px;
+}
+
+.appointment {
+    .title {
+        color: $light !important;
+    }
+
+    .item {
+        border: 0;
+    }
+
+    .apointmentContent{
+        height: auto!important;
+    }
+
+    .bar-footer {
+        height: 57px;
+    }
+
+  .bar-footer .row{
+    background-color: white!important;
+  }
+}
+
+.homeAddressModal {
+  .addressEditModalContent{
+    height: auto!important;
+  }
+  .item{
+      border: none;
+  }
+
+  .bar-footer {
+      height: 57px;
+  }
+
+  .bar-footer .row{
+    background-color: white!important;
+  }
+}
+
+.centerPage{
+  margin: auto;
+  position: relative;
+  text-align: center;
+  top: 30vh;
+  width: 100%;
+}
+
+.officeAddressModal {
+  .addressEditModalContent{
+    height: auto!important;
+  }
+  .item{
+      border: none;
+  }
+
+  .bar-footer {
+      height: 57px;
+  }
+
+  .bar-footer .row{
+    background-color: white!important;
+  }
+}
+
+.appointments{
+  img{
+    margin-top: 5px;
+    font-size: 50px
+  }
+}
+
+input[readonly]:not(.cloned-text-input) {
+    background-color: $light;
+}
+
+.favorite-student {
+    border-radius: 50%;
+    max-width: 40px;
+    min-height: 40px;
+}
+
+.sortPlacesIcon{
+    font-size: 25px!important;
+    padding-right: 5px!important;
+}
+
+.platform-ios.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > * {
+  margin-top: 2vh !important
+}
+
+.platform-ios .bar-custm .title {
+  line-height: 56px !important;
+  font-size: 3vh;
+}
+
+.stateName{
+  padding-left: 30px;
+  padding-right:30px;
+}
+
+.platform-android .bar .title {
+    line-height: 5vh!important;
+    font-size: 3vh;
+}
+
+.platform-android .stateName{
+    margin-top: 4%;
+}
+
+
+.dateTitle{
+  line-height: 25px !important;
+}
+
+.loginpage-bg{
+    height: 40vh;
+}
+
+.loginpage-GIF{
+  height: 30vh;
+  width: 100%;
+}
+
+.bar-custom-color{
+  border-color: #13A0DB !important;
+  background-color: #13A0DB !important;
+  color: #fff;
+}
+
+.platform-ios {
+//    Iphone 5s
+    @media only screen and (min-device-width : 320px) and (max-device-width : 568px) {
+      .loginpage-bg{
+        height: 34vh!important;
+      }
+
+      .socialLoginButtons{
+        font-size: 12px!important;
+      }
+
+      .invoiceHeader{
+        font-size: 15px!important;
+      }
+
+      .dateTitle{
+        line-height: 25px !important;
+      }
+
+      .invoiceLabel{
+        font-size: 13px!important;
+      }
+    }
+//    Iphone 7 Iphone 6
+    @media only screen and (min-device-width : 375px) and (max-device-width : 667px) {
+        .loginpage-bg{
+            height: 43vh!important;
+        }
+
+        .dateTitle{
+          line-height: 25px !important;
+        }
+
+        .invoiceHeader{
+          font-size: 16px!important;
+        }
+
+        .invoiceLabel{
+          font-size: 14px!important;
+        }
+
+        .socialLoginButtons{
+          font-size: 13px!important;
+        }
+    }
+
+//    Iphone 7 Plus Iphone 6 Plus
+    @media only screen and (min-device-width : 414px) and (max-device-width : 736px){
+        .loginpage-bg{
+            height: 48vh!important;
+        }
+
+        .dateTitle{
+          line-height: 25px !important;
+        }
+
+        .invoiceHeader{
+          font-size: 18px!important;
+        }
+
+        .invoiceLabel{
+          font-size: 15px!important;
+        }
+
+        .socialLoginButtons{
+          font-size: 14px!important;
+        }
+    }
+
+//    iPad
+    @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+      .loginpage-bg{
+          height: 65vh!important;
+      }
+
+      .dateTitle{
+        line-height: 25px !important;
+      }
+
+      .invoiceHeader{
+        font-size: 18px!important;
+      }
+
+      .invoiceLabel{
+        font-size: 16px!important;
+      }
+
+      .socialLoginButtons{
+        font-size: 18px!important;
+      }
+
+      .stateName{
+        margin-top: -10px!important;
+      }
+    }
+
+    .schoolFinderWrap{
+        height: auto!important;
+    }
+}
+
+//Custom DatePicker CSS
+
+.ionic_datepicker_popup .popup-body {
+  .selected_date_full {
+    background-color: #11c1f3!important;
+  }
+  
+  .month_select, .year_select{
+    border-bottom: 1px solid #11c1f3!important;
+  }
+  
+  .month_select:after, .year_select:after{
+    color: #11c1f3!important;
+  }
+  
+  .button-clear {
+    color: #11c1f3!important;
+  }
+  
+  .today {
+    border: 1px solid #11c1f3;
+  }
+  
+  .selected_date {
+    background-color: #11c1f3;
+  }
+}
+
+.ionic_datepicker_popup .popup-buttons {
+  button {
+    background-color: #11c1f3!important;
+  }
+}
+
+//Custom Timepicker CSS
+
+.ionic_timepicker_popup .popup-body {
+  .heading {
+    background-color: #11c1f3!important;
+  }
+}
+
+.ionic_timepicker_popup .button_set{
+  background-color: #11c1f3!important;
+}
+
+.ionic_timepicker_popup .button_close{
+  background-color: #11c1f3!important;
+}
+

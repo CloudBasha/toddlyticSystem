@@ -1,0 +1,67 @@
+<ion-content id="appointmentContent" class="has-header appointments">
+    <ion-refresher ng-if="appointments.list.length" pulling-icon="ion-refresh positive" refreshing-icon="ion-loading-b positive"
+                 on-refresh="doRefresh()"></ion-refresher>
+    <div class="list" ng-if="appointments.list.length">
+        <li class="item" ng-repeat="appointment in appointments.list">
+            <div ng-if="appointment.appointment.lead.status == 'Appointment Requested'">
+              <h3>{{ appointment.appointment.school.schoolName }}</h3>
+              <h4 class="wordWrap">Appoinment requested for {{appointment.childName}}</h4>
+              <h4>{{ appointment.appointment.preferredDate }} {{ appointment.appointment.preferredTime }}</h4>
+            </div>
+            
+            <div ng-if="appointment.appointment.lead.status == 'Appointment Confirmed'">
+              <h3>{{ appointment.appointment.school.schoolName }}</h3>
+              <h4 class="wordWrap">Appoinment with {{appointment.adminName}} for {{appointment.childName}} is confirmed</h4>
+              <h4>{{ appointment.appointment.actualDate }} {{ appointment.appointment.actualTime }}</h4>
+              <h4 ng-if="appointment.actualTimestamp !== appointment.preferredTimestamp">New Time</h4>
+            </div>
+          
+             <div ng-if="appointment.appointment.lead.status == 'Enrollment Initiated'">
+              <h3>{{ appointment.appointment.school.schoolName }}</h3>
+              <h4 class="wordWrap">Enrollment for {{appointment.childName}} has been approved by {{appointment.adminName}}</h4><br>
+              <h4 class="wordWrap">Do you Accept the Enrollment?</h4>
+            </div>
+          
+            <div ng-if="appointment.appointment.lead.status == 'Enrollment Approved' || appointment.appointment.lead.status == 'Enrollment Rejected'">
+              <h3>{{ appointment.appointment.school.schoolName }}</h3>
+              <h4 class="wordWrap">Enrollment for {{appointment.childName}} has been approved by {{appointment.adminName}}</h4><br>
+              <h4 ng-if="appointment.appointment.lead.status == 'Enrollment Approved'" class="wordWrap">You have accepted the Enrollment</h4>
+               <h4 ng-if="appointment.appointment.lead.status == 'Enrollment Rejected'" class="wordWrap">You have rejected the Enrollment</h4>
+            </div>
+          
+<!--
+            <div ng-if="appointment.appointment.lead.status == 'Enrollment Initiated'">
+              <h3>{{ appointment.appointment.school.schoolName }}</h3>
+              <h4 class="wordWrap">Appoinment with {{appointment.adminName}} for {{appointment.appointment.childName}} is confirmed</h4>
+              <h4 ng-if="appointment.appointment.actualDate && appointment.appointment.actualTime">{{ appointment.appointment.actualDate }} {{ appointment.appointment.actualTime }}</h4>
+              <h4 ng-if="!appointment.appointment.actualDate && !appointment.appointment.actualTime">{{ appointment.appointment.preferredDate }} {{ appointment.appointment.preferredTime }}</h4>
+            </div>
+-->
+            <div ng-if="appointment.appointment.lead.status == 'Enrollment Initiated'" class="button-bar">
+              <a class="button icon ion-checkmark-circled" ng-if="appointment.appointment.lead.status === 'Enrollment Initiated' || appointment.appointment.lead.status === 'Enrollment Approved'" ng-class="{'balanced': appointment.appointment.lead.status === 'Enrollment Approved'}" ng-disabled="appointment.appointment.lead.status === 'Enrollment Approved'" ng-click="acceptReject(appointment, 'Accepted Enrollment')"></a>
+              
+              <a class="button icon ion-close-circled" ng-if="appointment.appointment.lead.status === 'Enrollment Initiated' || appointment.appointment.lead.status === 'Enrollment Rejected'" ng-class="{'assertive': appointment.appointment.lead.status === 'Enrollment Rejected'}" ng-disabled="appointment.appointment.lead.status === 'Enrollment Rejected'" ng-click="acceptReject(appointment, 'Rejected Enrollment')"></a>
+            </div>
+          
+            <div class="button-bar">              
+              <a class="button icon ion-ios-telephone" ng-disabled="!appointment.appointment.school.contactNumber" ng-click="contactSchool(appointment.appointment.school)"></a>
+              <a class="button icon ion-ios-email" ng-disabled="!appointment.appointment.school.email" ng-click="mailSchool(appointment)"></a>
+<!--              <a class="button icon ion-android-more-vertical" ng-disabled="appointment.appointment.lead.status !== 'Enrollment Initiated' || appointment.appointment.lead.status !== 'Enrolled' || appointment.appointment.lead.status !== 'Rejected'" ng-click="moreInfo(appointment)"></a>-->
+<!--
+              <button type="button" class="button button-small button-icon" ng-disabled="appointment.appointment.lead.status !== 'Enrollment Initiated' && appointment.appointment.lead.status !== 'Enrollment Approved' && appointment.appointment.lead.status !== 'Enrollment Rejected'" style="float:right; margin-top: 30px;width: 15%;" ng-click="moreInfo(appointment);$event.stopPropagation()">
+                <i class="icon ion-information-circled placeholder-icon"></i>
+              </button>
+-->
+              <a class="button icon ion-information-circled placeholder-icon" ng-disabled="appointment.appointment.lead.status !== 'Enrollment Initiated' && appointment.appointment.lead.status !== 'Enrollment Approved' && appointment.appointment.lead.status !== 'Enrollment Rejected'" ng-click="moreInfo(appointment)"></a>
+              
+              <a ng-if="appointment.appointment.school.googlePlaceUrl !== null && appointment.appointment.school.googlePlaceUrl !== ''" class="button" ng-click="navigateToLocation(appointment.lat, appointment.lng)">
+                <img src="./img/GPS.svg">
+              </a>
+            </div>
+        </li>
+    </div>
+  
+    <div class="col centerPage" ng-if="!appointments.list.length">
+        <div style="font-size: 30px;line-height: 30px">Go to <i class="icon icon-school-finder"></i> > Home > Nearby and search for centers near you to make an appointment</div>
+    </div>
+</ion-content>

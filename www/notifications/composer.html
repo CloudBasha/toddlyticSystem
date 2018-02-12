@@ -1,0 +1,165 @@
+<div class="bar bar-subheader bar-subheader-custm">
+  <div class="action-sub-bar padding-horizontal" style="min-width: 100% !important;">
+    <input id="subject" type="text" placeholder="Subject" ng-model="notification.subject" ng-readonly="!onlyRead"
+           style="width: 100%;">
+  </div>
+</div>
+<ion-content class="has-header-custm notification-wrap">
+  <div class="list">
+    <label class="item item-input" style="border-bottom: none">
+                <textarea id="desc" placeholder="Write your message here" rows="20" ng-model="notification.text"
+                          ng-readonly="!onlyRead"></textarea>
+    </label>
+  </div>
+  <div class="list">
+    <label class="item item-icon-left item-select">
+      <div class=" bg-txt-color">
+        <i class="icon ion-ios-bell-outline"><!--<img ng-src="./img/alert.svg">--></i>
+        Notification Type
+      </div>
+      <select ng-if="reqType == undefined" ng-model="notifyType" ng-disabled="reqType !== undefined" ng-change="changeNotifyType(notifyType)">
+        <option value="messages">Messages</option>
+      </select>
+      <select ng-if="reqType !== undefined" ng-model="notifyType" ng-disabled="true" ng-change="changeNotifyType(notifyType)">
+        <option value="announcements">Announcement</option>
+        <option value="messages">Messages</option>
+        <option value="newsletters">Newsletter</option>
+      </select>
+    </label>
+
+
+<!--
+    <label class="item item-icon-left" ng-if="!onlyRead && reqType === 'receive' && loginResponse.type === 'PARENT'" ng-click="openPdf()" tappable>
+      <div class=" bg-txt-color">
+        <i class="icon ion-document"><img ng-src="./img/alert.svg"></i>
+        {{ displayNotification.newsletterUrl }}
+      </div>
+    </label>
+-->
+
+
+
+    <label ng-show="!isNewsletter" class="item item-icon-left item-select">
+      <div class=" bg-txt-color">
+        <i class="icon ion-ios-email-outline"><!--<img ng-src="./img/composer-mail.svg">--></i>
+        Message Type
+      </div>
+      <select ng-model="notification.messageType" ng-disabled="reqType !== undefined">
+        <option value="Email">Email</option>
+        <option value="SMS">SMS</option>
+        <!--<option value="Push Message">Push Notification</option>-->
+      </select>
+    </label>
+
+    <label class="item item-icon-left" ng-if="!onlyRead && reqType === 'receive'">
+      <div class=" bg-txt-color">
+        <i class="icon ion-ios-people-outline"></i>
+        Sender : {{displayNotification.createdBy}}
+      </div>
+    </label>
+
+    <a ng-if="(!onlyRead && isAnnouncement)" class="item item-icon-left bg-txt-color" style="padding: 0 0 0 54px;">
+      <i class="icon ion-ios-people-outline"></i>
+      <fancy-select
+        header-text="Recipients"
+        items="tagEnrollments"
+        value="notification.enrollmentIds"
+        value-property="programSchoolId"
+        text-property="name"
+        multi-select="true"
+        text="Recipients"
+        modal-template-url="lib/ionic-fancy-select/templates/modal-template.html"
+        template-url="lib/ionic-fancy-select/templates/item-template.html"
+        >
+      </fancy-select>
+    </a>
+
+    <a ng-if="(onlyRead && isAnnouncement)" class="item item-icon-left bg-txt-color" style="padding: 0 0 0 54px;">
+      <i class="icon ion-ios-people-outline"></i>
+      <fancy-select
+        header-text="Recipients"
+        items="tagEnrollments"
+        value="notification.enrollmentIds"
+        value-property="programSchoolId"
+        text-property="name"
+        multi-select="true"
+        text="Recipients"
+        modal-template-url="lib/ionic-fancy-select/templates/modal-template-editable.html"
+        template-url="lib/ionic-fancy-select/templates/item-template.html"
+        >
+      </fancy-select>
+    </a>
+
+    <a ng-if="(!onlyRead && isMessage)" class="item item-icon-left bg-txt-color" style="padding: 0 0 0 54px;">
+      <i class="icon ion-ios-people-outline"></i>
+      <fancy-select
+        header-text="Recipients"
+        items="tagEnrollments"
+        value="notification.enrollmentIds"
+        value-property="contactId"
+        text-property="name"
+        multi-select="true"
+        text="Recipients"
+        modal-template-url="lib/ionic-fancy-select/templates/modal-template.html"
+        template-url="lib/ionic-fancy-select/templates/item-template.html"
+        >
+      </fancy-select>
+    </a>
+
+    <a ng-if="(onlyRead && isMessage)" class="item item-icon-left bg-txt-color" style="padding: 0 0 0 54px;">
+      <i class="icon ion-ios-people-outline"></i>
+      <fancy-select
+        header-text="Recipients"
+        items="tagEnrollments"
+        value="notification.enrollmentIds"
+        value-property="contactId"
+        text-property="name"
+        multi-select="true"
+        text="Recipients"
+        modal-template-url="lib/ionic-fancy-select/templates/modal-template-editable.html"
+        template-url="lib/ionic-fancy-select/templates/item-template.html"
+        >
+      </fancy-select>
+    </a>
+
+    <a ng-if="(onlyRead && isNewsletter) && loginResponse.type !== 'PARENT'" class="item item-icon-left bg-txt-color" style="padding: 0 0 0 54px;">
+      <i class="icon ion-ios-people-outline"></i>
+      <fancy-select
+        header-text="Recipients"
+        items="tagEnrollments"
+        value="notification.enrollmentIds"
+        value-property="programSchoolId"
+        text-property="name"
+        multi-select="true"
+        text="Recipients"
+        modal-template-url="lib/ionic-fancy-select/templates/modal-template-editable.html"
+        template-url="lib/ionic-fancy-select/templates/item-template.html"
+        >
+      </fancy-select>
+    </a>
+
+    <a ng-if="(!onlyRead && isNewsletter) && loginResponse.type !== 'PARENT'" class="item item-icon-left bg-txt-color" style="padding: 0 0 0 54px;">
+      <i class="icon ion-ios-people-outline"></i>
+      <fancy-select
+        header-text="Recipients"
+        items="tagEnrollments"
+        value="notification.enrollmentIds"
+        value-property="programSchoolId"
+        text-property="name"
+        multi-select="true"
+        text="Recipients"
+        modal-template-url="lib/ionic-fancy-select/templates/modal-template.html"
+        template-url="lib/ionic-fancy-select/templates/item-template.html"
+        >
+      </fancy-select>
+    </a>
+
+    <div class="row" ng-if="onlyRead">
+      <div class="col">
+        <button class="button button-full button-positive" ng-click="sendNotification(notifyType)">
+          Send Now
+        </button>
+      </div>
+    </div>
+  </div>
+</ion-content>

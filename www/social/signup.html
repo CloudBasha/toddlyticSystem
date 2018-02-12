@@ -1,0 +1,124 @@
+<ion-view class="signup">
+    <form name="signupForm" class="padding marigin-top" novalidate>
+      <ion-content class="bg-color padding">
+          <div class="list" align="center" ng-if="!submitRegister" style="margin-bottom: 20vh;">
+            <label class="item item-input item-input-custm item-stacked-label bdr-none">
+              <span class="input-label txt-color bg-none input-label-custm">Full Name</span>
+              <input type="text" name="name" class="bg-none input-custm" ng-model="user.name" required>
+              <div ng-messages="signupForm.name.$error" class="col-sm-12 help-block noPadding" role="alert">
+                <div ng-message="required">Required field*</div>
+              </div>
+            </label>
+            <label class="item item-input item-input-custm item-stacked-label bdr-none">
+              <span class="input-label txt-color bg-none input-label-custm">Email</span>
+              <input type="email" name="email" ng-disabled="user.socialType  == 'google' || user.socialType == 'facebook'" class="bg-none input-custm" ng-pattern='/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i'  ng-model="user.email" required>
+              <div ng-messages="signupForm.email.$error" class="col-sm-12 help-block noPadding" role="alert">
+                <div ng-message="required">Required field*</div>
+                <div ng-message="pattern">This is an invalid email address</div>
+              </div>
+            </label>
+            <label class="item col-75 item-input item-input-custm item-stacked-label custom-width bdr-none">
+              <span class="input-label txt-color bg-none input-label-custm">Contact No.</span>
+              <input type="text" name="phone" class="bg-none input-custm" ng-pattern="/^(\+\d{1,3}[- ]?)?\d{9}$/" ng-model="user.phone" ng-init="user.phone='+'" required>
+              <div ng-messages="signupForm.phone.$error" class="col-sm-12 help-block noPadding" role="alert">
+                <div ng-message="required">Required field*</div>
+                <div ng-message="pattern">Your phone number must include your full country code with the + symbol</div>
+              </div>
+            </label>
+            <button type="button" class="button button-small button-icon" style="float:right; margin-top: 30px;width: 15%;" ng-click="showInfo();$event.stopPropagation()">
+              <i class="icon ion-information-circled placeholder-icon"></i>
+            </button>
+            <div class="row">
+            </div>
+            <label ng-if="!user.socialType" class="item item-input item-input-custm item-stacked-label bdr-none">
+              <span class="input-label txt-color bg-none input-label-custm">New Password</span>
+              <input type="password" name="password" class="bg-none input-custm" ng-model="user.password" ng-pattern='/^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z_@./#&+-]{6,}$/i' required>
+              <div ng-messages="signupForm.password.$error" class="col-sm-12 help-block noPadding" role="alert">
+                <div ng-message="required">Required field*</div>
+                <div ng-message="pattern">Password must be minimum 6 characters and alphanumeric.</div>
+              </div>
+            </label>
+            <label ng-if="!user.socialType" class="item item-input item-input-custm item-stacked-label bdr-none">
+              <span class="input-label txt-color bg-none input-label-custm">Confirm New Password</span>
+              <input type="password" name="cPassword" class="bg-none input-custm" ng-model="user.cPassword" ng-pattern='/^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z_@./#&+-]{6,}$/i' required>
+              <div ng-messages="signupForm.cPassword.$error" class="col-sm-12 help-block noPadding" role="alert">
+                <div ng-message="required">Required field*</div>
+                <div ng-message="pattern">Password must be minimum 6 characters and alphanumeric.</div>
+              </div>
+            </label>
+          </div>
+  <!--
+          <div class="row">
+            <div class="col text-center">
+              <button class="button signin-btn button-calm" ui-sref="registrationSelection({user: user})"
+                      style="background-color: #ffffff !important; color:#13A0DB;min-height: 40px;">Back
+              </button>
+            </div>
+            <div class="col text-center">
+              <button class="button signin-btn button-calm" style="background-color: #13A0DB !important;min-height: 40px;" type="submit" ng-disabled="$scope.signupForm.$invalid">Register</button>
+            </div>
+          </div>
+  -->
+          <!-- <div class="row" ng-show="manualEntry">
+            <div class="col">
+              <label class="item item-input item-floating-label" style="border: 0;">
+                <input type="text" placeholder="TAC" ng-model="manual.tac">
+                <span ng-show="submitted && !tac" class="error">Please enter TAC.</span>
+              </label>
+            </div>
+          </div>
+          <div class="row" ng-show="manualEntry">
+            <div class="col text-center">
+              <button class="button signin-btn button-calm" type="button" style="background-color: #13A0DB !important;min-height: 40px;" ng-click="submitTac(manual)" ng-disabled="$scope.signupForm.$invalid">Submit TAC</button>
+            </div>
+          </div> -->
+  <!--
+      <div class="row">
+        <div class="col text-center">
+          <button class="button signin-btn button-calm" ui-sref="registrationSelection({user: user})"
+                  style="background-color: #ffffff !important; color:#13A0DB;min-height: 40px;">Back
+          </button>
+        </div>
+      </div>
+  -->
+      <div ng-if="submitRegister">
+        <div class="col text-center" style="padding-top:20px">
+          <h2 class="txt-color">Activation Required</h2>
+        </div>
+        <div class="col text-left txt-color">
+          <p style="font-size: 15px;">To continue, </p><br>
+          <p style="font-size: 15px;">1. Please check the verification email that was sent to {{user.email}}</p>
+          <p style="font-size: 15px;">2. Click on the Click Here to Verify button</p>
+          <p style="font-size: 15px;">3. Enter the PIN that was sent to {{user.phone}} to activate your account</p><br>
+          <p style="font-size: 15px;" class="text-center">Auto redirect will happen in {{counter}} seconds</p><br>
+          <p style="font-size: 15px;" class="text-center">Your security and privacy is our priority.</p>
+        </div>
+      </div>
+
+<!--
+      <div class="row">
+          <div class="col text-center">
+            <button class="button signin-btn button-calm" ui-sref="registrationSelection({user: user})"
+                    style="background-color: #ffffff !important; color:#13A0DB;min-height: 40px;">Back
+            </button>
+          </div>
+          <div class="col text-center">
+            <button class="button signin-btn button-calm" style="background-color: #13A0DB !important;min-height: 40px;" type="button" ng-click="submit(signupForm)">Register</button>
+          </div>
+      </div>
+-->
+    </ion-content>
+    <ion-footer-bar class="no-padding" ng-if="!submitRegister">
+      <div class="row">
+          <div class="col text-center">
+            <button class="button signin-btn button-calm" ui-sref="registrationSelection({user: user})"
+                    style="background-color: #ffffff !important; color:#13A0DB;min-height: 40px;">Back
+            </button>
+          </div>
+          <div class="col text-center">
+            <button class="button signin-btn button-calm" style="background-color: #13A0DB !important;min-height: 40px;" type="button" ng-click="submit(signupForm)" ng-disabled="$scope.signupForm.$invalid">Register</button>
+          </div>
+      </div>
+    </ion-footer-bar>
+  </form>
+</ion-view>

@@ -1,0 +1,55 @@
+<ion-content class="bar-subheader-custm">
+  <div class="schoolListContainer">
+    <ul class="list">
+      <li class="item" ng-repeat="program in programs">
+        <div class="col">
+          <p>{{program.programSchool.programSchoolName}}</p>
+<!--          <p>Age {{program.programSchool.program.startAge}} - {{program.programSchool.program.endAge}}</p>-->
+          <label class="item-input">
+            <span style="padding-right: 10px;">Age</span>
+            <div class="row">
+             <div class="col-40">
+               <label class="item item-input item-select">
+                  <select ng-model="program.programSchool.program.startAge" class="fullSelectWidth" disabled="true">
+                    <option value="1">0 Months</option>
+                    <option value="2">6 Months</option>
+                    <option value="3">12 Months</option>
+                    <!-- <option value="4">1 Year</option> -->
+                    <option value="4">2 Years</option>
+                    <option value="5">3 Years</option>
+                    <option value="6">4 Years</option>
+                    <option value="7">5 Years</option>
+                    <option value="8">6 Years</option>
+                    <option value="9">7 Years</option>
+                  </select>
+                </label>
+              </div>
+              <div class="col-20 text-center">
+                <span>To</span>
+              </div>
+              <div class="col-40">
+                <label class="item item-input item-select">
+                  <select ng-model="program.programSchool.program.endAge" class="fullSelectWidth" disabled="true">
+                    <option value="1">0 Months</option>
+                    <option value="2">6 Months</option>
+                    <option value="3">12 Months</option>
+                    <!-- <option value="4">1 Year</option> -->
+                    <option value="4">2 Years</option>
+                    <option value="5">3 Years</option>
+                    <option value="6">4 Years</option>
+                    <option value="7">5 Years</option>
+                    <option value="8">6 Years</option>
+                    <option value="9">7 Years</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+          </label>
+          
+          <p style=" white-space: pre-wrap;">{{program.programSchool.program.programDescription}}</p>
+
+        </div>
+      </li>
+    </ul>
+  </div>
+</ion-content>

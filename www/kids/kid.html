@@ -1,0 +1,53 @@
+<ion-content class="has-header profile kid">
+    <div class="row">
+        <div class="col padding-vertical text-center" ng-if="!adding" ng-click="openActionSheet()">
+            <img class="avatar" ng-src="{{checkImageUrl(picture)}}" ng-if="picture != null">
+            <img class="avatar" ng-src="./img/defaultAvatar.jpg" ng-if="picture == null">
+        </div>
+    </div>
+    <form name="kidForm">
+      <div class="list">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Name</span>
+          <input type="text" placeholder="John" name="name" ng-model="kid.studentName" required>
+          <div ng-messages="kidForm.name.$error" class="col-sm-12 help-block padding" role="alert">
+            <div ng-message="required">Required field*</div>
+          </div>
+        </label>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Gender
+          </div>
+          <select ng-model="kid.studentGender" name="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </label>
+        <div ng-messages="kidForm.gender.$error" style="padding-right: 20px" class="col-sm-12 help-block padding" role="alert">
+          <div ng-message="required">Required field*</div>
+        </div>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Date of Birth</span>
+          <input type="text" ng-model="kid.studentDob" name="dob" ng-click="openDatePicker()", readonly="" required>
+          <div ng-messages="kidForm.dob.$error" class="col-sm-12 help-block padding" role="alert">
+            <div ng-message="required">Required field*</div>
+          </div>
+        </label>
+<!--
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Student ID</span>
+          <input type="text" placeholder="" ng-model="kid.studentId" ng-readonly="true">
+        </label>
+-->
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Special Request</span>
+          <input type="text" placeholder="" ng-model="kid.specialRequest">
+        </label>
+
+        <div class="padding-top text-center">
+          <button class="button signin-btn button-calm" ng-click="update_info(kidForm)" ng-if="!adding">Update Info</button>
+          <button class="button signin-btn button-calm" ng-click="create(kidForm)" ng-if="adding">Create</button>
+        </div>
+      </div>
+    </form>
+</ion-content>
