@@ -10,8 +10,8 @@ angular.module('toddlytics', ['ionic', 'ngCordova', 'ng.deviceDetector', 'ionic.
 
 //  .constant('API_URL', 'https://dev.toddlytic.com/')
 // .constant('API_URL', 'https://uat.toddlytic.com/')
-//.constant('API_URL', 'https://sit.toddlytic.com/')
-     .constant('API_URL', 'https://system.toddlytic.com/')
+.constant('API_URL', 'https://sit.toddlytic.com/')
+//     .constant('API_URL', 'https://system.toddlytic.com/')
 //    .constant('API_URL', 'http://192.168.1.123:8080/Toddlytics/')
 //    .constant('API_URL', 'http://10.0.3.2:8080/Toddlytics/')
 
@@ -73,8 +73,8 @@ angular.module('toddlytics', ['ionic', 'ngCordova', 'ng.deviceDetector', 'ionic.
     }
    // $rootScope.imgURL = 'https://dev.toddlytic.com/';
 //   $rootScope.imgURL = 'https://uat.toddlytic.com/';
-// $rootScope.imgURL = 'https://sit.toddlytic.com/';
-       $rootScope.imgURL = 'https://system.toddlytic.com/';
+ $rootScope.imgURL = 'https://sit.toddlytic.com/';
+//       $rootScope.imgURL = 'https://system.toddlytic.com/';
 //   $rootScope.imgURL = 'http://192.168.1.123:8080/Toddlytics/';
 //    $rootScope.imgURL = 'http://10.0.3.2:8080/Toddlytics/';
 

@@ -23,7 +23,7 @@
         <span class="input-label">Meal</span>
         <input type="text" name="name" ng-model="eventDetails.meal" ng-readOnly="true">
       </label>
-      <label ng-if="eventDetails.notes" class="item item-input item-stacked-label">
+      <label ng-if="showLessonPlan && eventDetails.notes" class="item item-input item-stacked-label">
         <span class="input-label">Notes</span>
         <input type="text" name="name" ng-model="eventDetails.notes" ng-readOnly="true">
       </label>

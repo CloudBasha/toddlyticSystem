@@ -330,6 +330,19 @@ angular.module('toddlytics')
 
   $scope.showDetails = function(event) {
     $scope.eventDetails = event;
+    if (event.startTime.indexOf("AM") >= 0){
+        var eventTime = event.startTime.split('AM');
+    }
+    else{
+        var eventTime = event.startTime.split('PM');
+    }
+    var eventDateTime = moment(event.eventDate + ' ' + eventTime[0])
+    if(eventDateTime.isSameOrBefore(moment())){
+        $scope.showLessonPlan = true;
+    }
+    else{
+         $scope.showLessonPlan = false;
+    }
     $ionicModal.fromTemplateUrl('calendar/eventDetails.html', {
       animation: 'slide-in-up',
       scope: $scope
